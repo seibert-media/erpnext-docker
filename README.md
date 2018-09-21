@@ -1,7 +1,10 @@
-## Seibertmedia
+# Seibertmedia
 
 Seibert-Media Utils for ERPNext
 
-#### License
+## Install 
 
-MIT
+```bash          
+bench get-app library ssh://git@bitbucket.apps.seibert-media.net:7999/erp/seibertmedia-app.git
+bench --site erpnext.apps.seibert-media.net install-app seibertmedia
+```
