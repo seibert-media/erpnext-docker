@@ -1,0 +1,74 @@
+version: '3'
+services:
+  mariadb:
+    image: "mariadb"
+    environment:
+    - MYSQL_ROOT_HOST=%
+    - MYSQL_ROOT_PASSWORD=123
+    - MYSQL_USER=1bd3e0294da19198
+    - MYSQL_DATABASE=1bd3e0294da19198
+    - MYSQL_PASSWORD=iAlcDxokJhGvpxaK
+    volumes:
+    - ./conf/mariadb-conf.d:/etc/mysql/conf.d
+    - ./mariadb-initdb:/docker-entrypoint-initdb.d
+    ports:
+    - "3307:3306" #mariadb-port
+    container_name: mariadb
+
+  redis-cache:
+    image: redis:alpine
+
+    volumes:
+    - ./redis-conf/redis_cache.conf:/etc/conf.d/redis.conf
+
+    command: ["redis-server","/etc/conf.d/redis.conf"]
+
+    container_name: redis-cache
+
+  redis-queue:
+    image: redis:alpine
+
+    volumes:
+    - ./redis-conf/redis_queue.conf:/etc/conf.d/redis.conf
+
+    command: ["redis-server","/etc/conf.d/redis.conf"]
+
+    container_name: redis-queue
+
+  redis-socketio:
+    image: redis:alpine
+
+    volumes:
+    - ./redis-conf/redis_socketio.conf:/etc/conf.d/redis.conf
+
+    command: ["redis-server","/etc/conf.d/redis.conf"]
+
+    container_name: redis-socketio
+
+  frappe:
+    build:
+      context: .
+      args:
+        FRAPPE_BENCH_VERSION: master
+    ports:
+    - "8000:8000" #webserver_port
+    - "9000:9000" #socketio_port
+    - "6787:6787" #file_watcher_port
+    environment:
+    - ADMIN_PASSWORD=123
+    - DB_HOST=mariadb
+    - DB_NAME=1bd3e0294da19198
+    - DB_PASSWORD=iAlcDxokJhGvpxaK
+    stdin_open: true
+    tty: true
+    links:
+    - redis-cache
+    - redis-queue
+    - redis-socketio
+    - mariadb
+    depends_on:
+    - mariadb
+    - redis-cache
+    - redis-queue
+    - redis-socketio
+    container_name: frappe

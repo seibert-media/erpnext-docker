@@ -1,0 +1,4 @@
+{
+	"db_name": "{{DB_NAME}}",
+	"db_password": "{{DB_PASSWORD}}"
+}
