@@ -1,7 +1,7 @@
 version: '3'
 services:
   mariadb:
-    image: "mariadb"
+    image: "mariadb:10.3.9"
     environment:
     - MYSQL_ROOT_HOST=%
     - MYSQL_ROOT_PASSWORD=123
@@ -9,14 +9,14 @@ services:
     - MYSQL_DATABASE=1bd3e0294da19198
     - MYSQL_PASSWORD=iAlcDxokJhGvpxaK
     volumes:
-    - ./conf/mariadb-conf.d:/etc/mysql/conf.d
+    - ./mariadb-conf:/etc/mysql/conf.d
     - ./mariadb-initdb:/docker-entrypoint-initdb.d
     ports:
     - "3307:3306" #mariadb-port
     container_name: mariadb
 
   redis-cache:
-    image: redis:alpine
+    image: redis:4.0.11-alpine
 
     volumes:
     - ./redis-conf/redis_cache.conf:/etc/conf.d/redis.conf
@@ -26,7 +26,7 @@ services:
     container_name: redis-cache
 
   redis-queue:
-    image: redis:alpine
+    image: redis:4.0.11-alpine
 
     volumes:
     - ./redis-conf/redis_queue.conf:/etc/conf.d/redis.conf
@@ -36,7 +36,7 @@ services:
     container_name: redis-queue
 
   redis-socketio:
-    image: redis:alpine
+    image: redis:4.0.11-alpine
 
     volumes:
     - ./redis-conf/redis_socketio.conf:/etc/conf.d/redis.conf
