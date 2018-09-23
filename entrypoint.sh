@@ -28,6 +28,12 @@ if [ "$1" = 'bench' ] && [ "$2" = 'start' ]; then
 	bench --site site1.local install-app erpnext || true
 	bench --site site1.local install-app banana  || true
 
+	echo "Run migrations for all sites in the bench"
+	bench update --patch
+
+	echo "Build JS and CSS artifacts for the bench"
+	bench update --build
+
 	echo "run $@"
 fi
 
