@@ -8,6 +8,8 @@ set -o errtrace
 if [ "$1" = 'bench' ] && [ "$2" = 'start' ]; then
 	echo "setup $@"
 
+	python -c 'import sys; print("python encoding is "+sys.stdout.encoding)'
+
 	mkdir -p \
 	sites/site1.local/locks \
 	sites/site1.local/task-logs \

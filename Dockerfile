@@ -14,6 +14,7 @@ RUN set -x \
 	git \
 	gpg-agent \
 	iputils-ping \
+	language-pack-en \
 	libffi-dev \
 	libfreetype6-dev \
 	libjpeg8-dev \
@@ -48,7 +49,11 @@ RUN set -x \
 	&& DEBIAN_FRONTEND=noninteractive apt-get autoremove --yes \
 	&& DEBIAN_FRONTEND=noninteractive apt-get clean
 
-ENV LANG C.UTF-8
+
+ENV PYTHONIOENCODING=utf-8
+ENV LANGUAGE=en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
 RUN locale-gen en_US.UTF-8
 
 RUN groupadd -g 1000 frappe
