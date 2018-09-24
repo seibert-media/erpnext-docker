@@ -1,5 +1,6 @@
 FROM ubuntu:18.04
-MAINTAINER Benjamin Borbe <bborbe@rocketnews.de>
+
+LABEL maintainer="//SEIBERT/MEDIA GmbH  <docker@seibert-media.net>"
 
 RUN set -x \
 	&& DEBIAN_FRONTEND=noninteractive apt-get update --quiet \
@@ -75,7 +76,10 @@ WORKDIR /home/frappe/bench-repo
 RUN bench get-app erpnext https://github.com/frappe/erpnext.git --branch master
 RUN bench get-app banana https://github.com/bborbe/erpnext-banana-app.git --branch master
 
-COPY --chown=frappe:frappe bench-repo .
+USER root
+COPY bench-repo .
+RUN chown -R frappe:frappe /home/frappe/*
+USER frappe
 COPY entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
