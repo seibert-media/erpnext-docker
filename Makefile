@@ -7,7 +7,7 @@ default: build
 all: build upload clean
 
 build:
-	docker build -t $(REGISTRY)/$(IMAGE):$(VERSION) .
+	docker build --no-cache --rm=true -t $(REGISTRY)/$(IMAGE):$(VERSION) .
 
 upload:
 	docker push $(REGISTRY)/$(IMAGE):$(VERSION)
