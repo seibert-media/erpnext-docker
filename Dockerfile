@@ -1,9 +1,6 @@
 FROM ubuntu:18.04
 
 LABEL maintainer="//SEIBERT/MEDIA GmbH  <docker@seibert-media.net>"
-LABEL author="team-infinity"
-LABEL type="public"
-LABEL versioning="simple"
 
 RUN set -x \
 	&& DEBIAN_FRONTEND=noninteractive apt-get update --quiet \
