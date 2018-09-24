@@ -8,6 +8,15 @@ set -o errtrace
 if [ "$1" = 'bench' ] && [ "$2" = 'start' ]; then
 	echo "setup $@"
 
+	mkdir -p \
+	sites/site1.local/locks \
+	sites/site1.local/task-logs \
+	sites/site1.local/public \
+	sites/site1.local/public/files \
+	sites/site1.local/private \
+	sites/site1.local/private/files \
+	sites/site1.local/private/backups
+
 	echo "set ADMIN_PASSWORD to ***"
 	sed -i "s/{{ADMIN_PASSWORD}}/${ADMIN_PASSWORD}/" sites/common_site_config.json
 

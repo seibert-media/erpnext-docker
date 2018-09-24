@@ -48,8 +48,6 @@ services:
   frappe:
     build:
       context: .
-      args:
-        FRAPPE_BENCH_VERSION: master
     ports:
     - "8000:8000" #webserver_port
     - "9000:9000" #socketio_port

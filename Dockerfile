@@ -1,34 +1,77 @@
-ARG FRAPPE_BENCH_VERSION
-FROM bborbe/frappe-bench:$FRAPPE_BENCH_VERSION
+FROM ubuntu:18.04
 MAINTAINER Benjamin Borbe <bborbe@rocketnews.de>
 
+RUN set -x \
+	&& DEBIAN_FRONTEND=noninteractive apt-get update --quiet \
+	&& DEBIAN_FRONTEND=noninteractive apt-get upgrade --quiet --yes \
+	&& DEBIAN_FRONTEND=noninteractive apt-get install --quiet --yes --no-install-recommends \
+	apt-transport-https \
+	build-essential \
+	ca-certificates \
+	cron \
+	curl \
+	fontconfig \
+	git \
+	gpg-agent \
+	iputils-ping \
+	libffi-dev \
+	libfreetype6-dev \
+	libjpeg8-dev \
+	liblcms2-dev \
+	libldap2-dev \
+	libmysqlclient-dev \
+	libsasl2-dev \
+	libssl-dev \
+	libtiff5-dev \
+	libwebp-dev \
+	libxext6 \
+	libxrender1 \
+	locales \
+	mariadb-client \
+	mariadb-common \
+	nodejs \
+	npm \
+	python-dev \
+	python-pip \
+	python-setuptools \
+	python-tk \
+	python-wheel \
+	redis-tools \
+	rlwrap \
+	software-properties-common \
+	tcl8.6-dev \
+	tk8.6-dev \
+	wkhtmltopdf \
+	xfonts-75dpi \
+	xfonts-base \
+	zlib1g-dev \
+	&& DEBIAN_FRONTEND=noninteractive apt-get autoremove --yes \
+	&& DEBIAN_FRONTEND=noninteractive apt-get clean
+
+ENV LANG C.UTF-8
+RUN locale-gen en_US.UTF-8
+
+RUN groupadd -g 1000 frappe
+RUN useradd -ms /bin/bash -u 1000 -g 1000 frappe
+
+RUN npm install -g yarn
+
+RUN echo "127.0.0.1 site1.local" | tee --append /etc/hosts
+
 WORKDIR /home/frappe
-RUN bench init /home/frappe/branch-repo --ignore-exist --skip-redis-config-generation --frappe-branch master
+RUN git clone -b master https://github.com/frappe/bench.git bench-repo
+RUN pip install -e bench-repo
+RUN chown -R frappe:frappe /home/frappe
 
-WORKDIR /home/frappe/branch-repo
+USER frappe
+RUN bench init /home/frappe/bench-repo --ignore-exist --skip-redis-config-generation --frappe-branch master
 
-RUN mkdir -p \
-	sites/site1.local \
-	sites/site1.local/locks \
-	sites/site1.local/task-logs \
-	sites/site1.local/public \
-	sites/site1.local/public/files \
-	sites/site1.local/private \
-	sites/site1.local/private/files \
-	sites/site1.local/private/backups
-
+WORKDIR /home/frappe/bench-repo
 RUN bench get-app erpnext https://github.com/frappe/erpnext.git --branch master
 RUN bench get-app banana https://github.com/bborbe/erpnext-banana-app.git --branch master
 
-COPY Procfile Procfile
-COPY common_site_config.json sites/common_site_config.json
-COPY site_config.json sites/site1.local/site_config.json
-RUN echo "site1.local" > sites/currentsite.txt
-
-USER root
-RUN echo "127.0.0.1 site1.local" | tee --append /etc/hosts
+COPY --chown=frappe:frappe bench-repo .
 COPY entrypoint.sh /entrypoint.sh
-USER frappe
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["bench","start"]
