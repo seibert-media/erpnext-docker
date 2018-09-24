@@ -21,4 +21,6 @@ Open in Browser
 
 ## Links
 
-[https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
+inspired by [https://github.com/frappe/frappe_docker](https://github.com/frappe/frappe_docker)
+
+Docker Compose [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)

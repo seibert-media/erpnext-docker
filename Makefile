@@ -1,8 +1,17 @@
-all:
-	build upload
+REGISTRY ?= docker.seibert-media.net
+IMAGE    ?= seibertmedia/erpnext
+VERSION  ?= latest
+
+default: build
+
+all: build upload clean
 
 build:
-	docker build -t bborbe/erpnext:master .
+	docker build -t $(REGISTRY)/$(IMAGE):$(VERSION) .
 
 upload:
-	docker push bborbe/erpnext:master
+	docker push $(REGISTRY)/$(IMAGE):$(VERSION)
+
+clean:
+	docker rmi $(REGISTRY)/$(IMAGE):$(VERSION) || true
+
