@@ -1,8 +1,10 @@
-all:
-	build upload
+
+default: build
+
+all: build upload
 
 build:
-	docker build -t bborbe/erpnext:master .
+	docker build -t bborbe/erpnext:latest .
 
 upload:
-	docker push bborbe/erpnext:master
+	docker push bborbe/erpnext:latest
