@@ -23,7 +23,7 @@ RUN set -x \
 	libldap2-dev \
 	libmysqlclient-dev \
 	libsasl2-dev \
-	libssl-dev \
+	libssl1.0-dev \
 	libtiff5-dev \
 	libwebp-dev \
 	libxext6 \
