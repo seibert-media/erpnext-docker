@@ -38,6 +38,7 @@ if [ "$1" = 'bench' ] && [ "$2" = 'start' ]; then
 	echo "install apps ..."
 	bench --site site1.local install-app erpnext || true
 	bench --site site1.local install-app banana  || true
+	bench --site site1.local install-app seibertmedia  || true
 
 	echo "Run migrations for all sites in the bench"
 	bench update --patch
