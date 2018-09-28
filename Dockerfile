@@ -41,6 +41,7 @@ RUN set -x \
 	redis-tools \
 	rlwrap \
 	software-properties-common \
+	ssh \
 	tcl8.6-dev \
 	tk8.6-dev \
 	wkhtmltopdf \
