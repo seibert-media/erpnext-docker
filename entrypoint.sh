@@ -38,9 +38,9 @@ if [ "$1" = 'bench' ] && [ "$2" = 'start' ]; then
 	echo "install app erpnext"
 	bench --site site1.local install-app erpnext || true
 
-	echo "install app banana"
+	echo "uninstall app banana"
 	bench get-app banana https://github.com/bborbe/erpnext-banana-app.git --branch master
-	bench --site site1.local install-app banana  || true
+	bench --site site1.local uninstall-app banana  || true
 
 	echo "install app seibertmedia"
 	bench get-app seibertmedia ssh://git@bitbucket.apps.seibert-media.net:7999/erp/seibertmedia-app.git --branch 1.0.0
