@@ -39,11 +39,11 @@ if [ "$1" = 'bench' ] && [ "$2" = 'start' ]; then
 	bench --site site1.local install-app erpnext || true
 
 	echo "uninstall app banana"
-	bench get-app banana https://github.com/bborbe/erpnext-banana-app.git --branch master
+	bench get-app banana https://github.com/bborbe/erpnext-banana-app.git --branch master || true
 	bench --site site1.local uninstall-app banana  || true
 
 	echo "install app seibertmedia"
-	bench get-app seibertmedia ssh://git@bitbucket.apps.seibert-media.net:7999/erp/seibertmedia-app.git --branch 1.0.0
+	bench get-app seibertmedia ssh://git@bitbucket.apps.seibert-media.net:7999/erp/seibertmedia-app.git --branch 1.0.0  || true
 	bench --site site1.local install-app seibertmedia  || true
 
 	echo "Run migrations for all sites in the bench"
