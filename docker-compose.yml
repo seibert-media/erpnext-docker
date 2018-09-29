@@ -45,7 +45,7 @@ services:
 
     container_name: redis-socketio
 
-  frappe:
+  erpnext:
     image: docker.seibert-media.net/seibertmedia/erpnext:master
     build:
       context: .
@@ -70,4 +70,4 @@ services:
     - redis-cache
     - redis-queue
     - redis-socketio
-    container_name: frappe
+    container_name: erpnext
