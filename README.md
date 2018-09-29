@@ -19,6 +19,8 @@ Open in Browser
 
 [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
+Login with Administrator and 123
+
 ## Links
 
 inspired by [https://github.com/frappe/frappe_docker](https://github.com/frappe/frappe_docker)
