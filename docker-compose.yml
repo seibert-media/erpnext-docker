@@ -46,6 +46,7 @@ services:
     container_name: redis-socketio
 
   frappe:
+    image: docker.seibert-media.net/seibertmedia/erpnext:master
     build:
       context: .
     ports:
