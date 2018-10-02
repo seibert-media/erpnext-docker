@@ -19,6 +19,9 @@ if [ "$1" = 'bench' ] && [ "$2" = 'start' ]; then
 	sites/site1.local/private/files \
 	sites/site1.local/private/backups
 
+	echo "set ROOT_PASSWORD to ***"
+	sed -i "s/{{ROOT_PASSWORD}}/${ROOT_PASSWORD}/" sites/common_site_config.json
+
 	echo "set ADMIN_PASSWORD to ***"
 	sed -i "s/{{ADMIN_PASSWORD}}/${ADMIN_PASSWORD}/" sites/common_site_config.json
 
