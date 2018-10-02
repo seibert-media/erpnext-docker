@@ -45,10 +45,11 @@ if [ "$1" = 'bench' ] && [ "$2" = 'start' ]; then
 	bench --site site1.local uninstall-app banana -y || true
 
 	echo "Run migrations for all sites in the bench"
-	bench update --patch
+	bench --site all backup
+	bench --site all migrate
 
 	echo "Build JS and CSS artifacts for the bench"
-	bench update --build
+	bench build
 
 	echo "run $@"
 fi
