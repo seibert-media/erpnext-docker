@@ -10,11 +10,11 @@
 	"redis_queue": "redis://redis-queue:11000",
 	"redis_socketio": "redis://redis-socketio:12000",
 	"restart_supervisor_on_update": false,
-	"root_password": "123",
+	"root_password": "{{ROOT_PASSWORD}}",
 	"serve_default_site": true,
 	"shallow_clone": true,
 	"socketio_port": 9000,
-	"update_bench_on_update": true,
+	"update_bench_on_update": false,
 	"webserver_port": 8000,
 	"admin_password": "{{ADMIN_PASSWORD}}"
 }

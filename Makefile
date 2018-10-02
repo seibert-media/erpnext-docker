@@ -15,3 +15,5 @@ upload:
 clean:
 	docker rmi $(REGISTRY)/$(IMAGE):$(VERSION) || true
 
+open:
+	open http://locahost:8000
