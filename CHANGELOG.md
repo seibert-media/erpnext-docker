@@ -11,6 +11,7 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 ## 1.1.0
 
 - add seibertmedia app 
+- use tags for erpnext and frappe
 
 ## 1.0.1
 
