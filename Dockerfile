@@ -72,8 +72,6 @@ RUN curl --connect-timeout 10 --max-time 120 -sSL https://github.com/wkhtmltopdf
 
 RUN npm install -g yarn
 
-RUN echo "127.0.0.1 site1.local" | tee --append /etc/hosts
-
 WORKDIR /home/frappe
 RUN git clone -b ${BENCH_VERSION} https://github.com/frappe/bench.git bench-repo
 RUN pip install -e bench-repo

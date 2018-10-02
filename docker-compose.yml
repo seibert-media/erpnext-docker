@@ -45,7 +45,8 @@ services:
 
     container_name: redis-socketio
 
-  frappe:
+  erpnext:
+    image: docker.seibert-media.net/seibertmedia/erpnext:master
     build:
       context: .
     ports:
@@ -58,6 +59,8 @@ services:
     - DB_HOST=mariadb
     - DB_NAME=1bd3e0294da19198
     - DB_PASSWORD=iAlcDxokJhGvpxaK
+    extra_hosts:
+    - "site1.local:127.0.0.1"
     stdin_open: true
     tty: true
     links:
@@ -70,4 +73,4 @@ services:
     - redis-cache
     - redis-queue
     - redis-socketio
-    container_name: frappe
+    container_name: erpnext
