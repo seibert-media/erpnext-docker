@@ -2,5 +2,4 @@
 	"developer_mode": 0,
 	"db_name": "{{DB_NAME}}",
 	"db_password": "{{DB_PASSWORD}}"
-	"developer_mode": 0,
 }
