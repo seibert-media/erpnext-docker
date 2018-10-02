@@ -14,7 +14,7 @@ build:
 	for i in $(VERSIONS); do \
 		tags="$$tags -t $(REGISTRY)/$(IMAGE):$$i"; \
 	done; \
-	docker build --no-cache --rm=true --build-arg VERSION=$(VENDOR_VERSION) $$tags .
+	docker build --no-cache --rm=true $$tags .
 
 clean:
 	@for i in $(VERSIONS); do \
