@@ -38,25 +38,20 @@ if [ "$1" = 'bench' ] && [ "$2" = 'start' ]; then
 	bench set-mariadb-host "${DB_HOST}"
 	bench set-admin-password "${ADMIN_PASSWORD}"
 
-	echo "install app erpnext"
+	echo "install apps ..."
 	bench --site site1.local install-app erpnext || true
-
-	echo "uninstall app banana"
-	bench --site site1.local uninstall-app banana  || true
-
-	echo "install app seibertmedia"
 	bench --site site1.local install-app seibertmedia  || true
 
 	echo "uninstall apps ..."
-	bench --site site1.local uninstall-app banana -y || true
+	bench --site site1.local uninstall-app banana  || true
 
-	echo "Run backup for all sites in the bench"
+	echo "run backup for all sites in the bench"
 	bench --site all backup
 
-	echo "Run migrations for all sites in the bench"
+	echo "run migrations for all sites in the bench"
 	bench --site all migrate
 
-	echo "Build JS and CSS artifacts for the bench"
+	echo "build JS and CSS artifacts for the bench"
 	bench build
 
 	echo "run $@"
