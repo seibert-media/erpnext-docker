@@ -2,6 +2,10 @@ FROM ubuntu:18.04
 
 LABEL maintainer="//SEIBERT/MEDIA GmbH  <docker@seibert-media.net>"
 
+ARG FRAPPE_VERSION=v10.1.49
+ARG ERPNEXT_VERSION=v10.1.54
+ARG BENCH_VERSION=master
+
 RUN set -x \
 	&& DEBIAN_FRONTEND=noninteractive apt-get update --quiet \
 	&& DEBIAN_FRONTEND=noninteractive apt-get upgrade --quiet --yes \
@@ -69,15 +73,16 @@ RUN npm install -g yarn
 RUN echo "127.0.0.1 site1.local" | tee --append /etc/hosts
 
 WORKDIR /home/frappe
-RUN git clone -b master https://github.com/frappe/bench.git bench-repo
+RUN git clone -b ${BENCH_VERSION} https://github.com/frappe/bench.git bench-repo
 RUN pip install -e bench-repo
 RUN chown -R frappe:frappe /home/frappe
 
 USER frappe
-RUN bench init /home/frappe/bench-repo --ignore-exist --skip-redis-config-generation --frappe-branch master
+RUN bench init /home/frappe/bench-repo --ignore-exist --skip-redis-config-generation --frappe-branch ${FRAPPE_VERSION}
 
 WORKDIR /home/frappe/bench-repo
-RUN bench get-app erpnext https://github.com/frappe/erpnext.git --branch master
+RUN bench get-app erpnext https://github.com/frappe/erpnext.git --branch ${ERPNEXT_VERSION}
+# TODO: remove banana app
 RUN bench get-app banana https://github.com/bborbe/erpnext-banana-app.git --branch master
 
 USER root
