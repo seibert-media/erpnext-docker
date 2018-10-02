@@ -43,7 +43,7 @@ if [ "$1" = 'bench' ] && [ "$2" = 'start' ]; then
 	bench --site site1.local install-app seibertmedia  || true
 
 	echo "uninstall apps ..."
-	bench --site site1.local uninstall-app banana  || true
+	bench --site site1.local uninstall-app banana -y || true
 
 	echo "run backup for all sites in the bench"
 	bench --site all backup
