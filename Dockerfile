@@ -2,6 +2,8 @@ FROM ubuntu:18.04
 
 LABEL maintainer="//SEIBERT/MEDIA GmbH  <docker@seibert-media.net>"
 
+ARG SEIBERTMEDIA_APP_VERSION=1.0.0
+
 RUN set -x \
 	&& DEBIAN_FRONTEND=noninteractive apt-get update --quiet \
 	&& DEBIAN_FRONTEND=noninteractive apt-get upgrade --quiet --yes \
@@ -72,6 +74,7 @@ RUN echo "127.0.0.1 site1.local" | tee --append /etc/hosts
 WORKDIR /home/frappe
 RUN git clone -b master https://github.com/frappe/bench.git bench-repo
 RUN pip install -e bench-repo
+COPY ssh /home/frappe/.ssh
 RUN chown -R frappe:frappe /home/frappe
 
 USER frappe
@@ -79,8 +82,12 @@ RUN bench init /home/frappe/bench-repo --ignore-exist --skip-redis-config-genera
 
 WORKDIR /home/frappe/bench-repo
 RUN bench get-app erpnext https://github.com/frappe/erpnext.git --branch master
+RUN bench get-app banana https://github.com/bborbe/erpnext-banana-app.git --branch master
+
+RUN bench get-app seibertmedia ssh://git@bitbucket.apps.seibert-media.net:7999/erp/seibertmedia-app.git --branch ${SEIBERTMEDIA_APP_VERSION}
 
 USER root
+RUN rm -rf /home/frappe/.ssh
 COPY bench-repo .
 RUN chown -R frappe:frappe /home/frappe/*
 USER frappe
