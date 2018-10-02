@@ -57,7 +57,6 @@ RUN set -x \
 	&& DEBIAN_FRONTEND=noninteractive apt-get autoremove --yes \
 	&& DEBIAN_FRONTEND=noninteractive apt-get clean
 
-
 ENV PYTHONIOENCODING=utf-8
 ENV LANGUAGE=en_US.UTF-8
 ENV LANG=en_US.UTF-8
@@ -86,10 +85,10 @@ RUN bench init /home/frappe/bench-repo --ignore-exist --skip-redis-config-genera
 
 WORKDIR /home/frappe/bench-repo
 RUN bench get-app erpnext https://github.com/frappe/erpnext.git --branch ${ERPNEXT_VERSION}
+RUN bench get-app seibertmedia ssh://git@bitbucket.apps.seibert-media.net:7999/erp/seibertmedia-app.git --branch ${SEIBERTMEDIA_APP_VERSION}
+
 # TODO: remove banana app
 RUN bench get-app banana https://github.com/bborbe/erpnext-banana-app.git --branch master
-
-RUN bench get-app seibertmedia ssh://git@bitbucket.apps.seibert-media.net:7999/erp/seibertmedia-app.git --branch ${SEIBERTMEDIA_APP_VERSION}
 
 USER root
 RUN rm -rf /home/frappe/.ssh
