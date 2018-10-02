@@ -53,6 +53,7 @@ services:
     - "9000:9000" #socketio_port
     - "6787:6787" #file_watcher_port
     environment:
+    - ROOT_PASSWORD=123
     - ADMIN_PASSWORD=123
     - DB_HOST=mariadb
     - DB_NAME=1bd3e0294da19198

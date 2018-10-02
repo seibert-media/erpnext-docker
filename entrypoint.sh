@@ -19,6 +19,9 @@ if [ "$1" = 'bench' ] && [ "$2" = 'start' ]; then
 	sites/site1.local/private/files \
 	sites/site1.local/private/backups
 
+	echo "set ROOT_PASSWORD to ***"
+	sed -i "s/{{ROOT_PASSWORD}}/${ROOT_PASSWORD}/" sites/common_site_config.json
+
 	echo "set ADMIN_PASSWORD to ***"
 	sed -i "s/{{ADMIN_PASSWORD}}/${ADMIN_PASSWORD}/" sites/common_site_config.json
 
@@ -44,11 +47,17 @@ if [ "$1" = 'bench' ] && [ "$2" = 'start' ]; then
 	echo "install app seibertmedia"
 	bench --site site1.local install-app seibertmedia  || true
 
+	echo "uninstall apps ..."
+	bench --site site1.local uninstall-app banana -y || true
+
+	echo "Run backup for all sites in the bench"
+	bench --site all backup
+
 	echo "Run migrations for all sites in the bench"
-	bench update --patch
+	bench --site all migrate
 
 	echo "Build JS and CSS artifacts for the bench"
-	bench update --build
+	bench build
 
 	echo "run $@"
 fi
