@@ -19,11 +19,13 @@ build:
 
 clean:
 	@for i in $(VERSIONS); do \
+		echo "docker rmi $(REGISTRY)/$(IMAGE):$$i"; \
 		docker rmi $(REGISTRY)/$(IMAGE):$$i || true; \
 	done
 
 upload:
 	@for i in $(VERSIONS); do \
+		echo "docker push $(REGISTRY)/$(IMAGE):$$i"; \
 		docker push $(REGISTRY)/$(IMAGE):$$i; \
 	done
 
