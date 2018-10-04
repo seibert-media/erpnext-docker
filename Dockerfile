@@ -2,9 +2,11 @@ FROM ubuntu:18.04
 
 LABEL maintainer="//SEIBERT/MEDIA GmbH  <docker@seibert-media.net>"
 
+
 ARG FRAPPE_VERSION=v10.1.49
 ARG ERPNEXT_VERSION=v10.1.54
 ARG BENCH_VERSION=master
+ARG SEIBERTMEDIA_APP_VERSION=1.0.0
 
 RUN set -x \
 	&& DEBIAN_FRONTEND=noninteractive apt-get update --quiet \
@@ -45,6 +47,7 @@ RUN set -x \
 	redis-tools \
 	rlwrap \
 	software-properties-common \
+	ssh \
 	tcl8.6-dev \
 	tk8.6-dev \
 	wkhtmltopdf \
@@ -53,7 +56,6 @@ RUN set -x \
 	zlib1g-dev \
 	&& DEBIAN_FRONTEND=noninteractive apt-get autoremove --yes \
 	&& DEBIAN_FRONTEND=noninteractive apt-get clean
-
 
 ENV PYTHONIOENCODING=utf-8
 ENV LANGUAGE=en_US.UTF-8
@@ -70,11 +72,11 @@ RUN curl --connect-timeout 10 --max-time 120 -sSL https://github.com/wkhtmltopdf
 
 RUN npm install -g yarn
 
-RUN echo "127.0.0.1 site1.local" | tee --append /etc/hosts
-
 WORKDIR /home/frappe
 RUN git clone -b ${BENCH_VERSION} https://github.com/frappe/bench.git bench-repo
 RUN pip install -e bench-repo
+COPY ssh /home/frappe/.ssh
+RUN chmod 400 /home/frappe/.ssh/*
 RUN chown -R frappe:frappe /home/frappe
 
 USER frappe
@@ -82,10 +84,13 @@ RUN bench init /home/frappe/bench-repo --ignore-exist --skip-redis-config-genera
 
 WORKDIR /home/frappe/bench-repo
 RUN bench get-app erpnext https://github.com/frappe/erpnext.git --branch ${ERPNEXT_VERSION}
+RUN bench get-app seibertmedia ssh://git@bitbucket.org:22/seibertmedia-alle/seibertmedia-app.git --branch ${SEIBERTMEDIA_APP_VERSION}
+
 # TODO: remove banana app
 RUN bench get-app banana https://github.com/bborbe/erpnext-banana-app.git --branch master
 
 USER root
+RUN rm -rf /home/frappe/.ssh
 COPY bench-repo .
 RUN chown -R frappe:frappe /home/frappe/*
 USER frappe

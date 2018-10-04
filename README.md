@@ -4,6 +4,14 @@ All freaze ERPNext and all installed apps.
 
 ## Local
 
+build or pull erpnext image
+
+Pull:
+
+```bash
+docker-compose pull
+```
+
 Build:
 
 ```bash
@@ -18,6 +26,8 @@ docker-compose up --force-recreate -d
 Open in Browser
 
 [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+Login with Administrator and 123
 
 ## Links
 

@@ -40,17 +40,18 @@ if [ "$1" = 'bench' ] && [ "$2" = 'start' ]; then
 
 	echo "install apps ..."
 	bench --site site1.local install-app erpnext || true
+	bench --site site1.local install-app seibertmedia  || true
 
 	echo "uninstall apps ..."
 	bench --site site1.local uninstall-app banana -y || true
 
-	echo "Run backup for all sites in the bench"
+	echo "run backup for all sites in the bench"
 	bench --site all backup
 
-	echo "Run migrations for all sites in the bench"
+	echo "run migrations for all sites in the bench"
 	bench --site all migrate
 
-	echo "Build JS and CSS artifacts for the bench"
+	echo "build JS and CSS artifacts for the bench"
 	bench build
 
 	echo "run $@"
