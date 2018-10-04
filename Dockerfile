@@ -75,8 +75,8 @@ RUN npm install -g yarn
 WORKDIR /home/frappe
 RUN git clone -b ${BENCH_VERSION} https://github.com/frappe/bench.git bench-repo
 RUN pip install -e bench-repo
-COPY ssh/id_rsa /home/frappe/.ssh/id_rsa
-RUN chmod 400 /home/frappe/.ssh/id_rsa
+COPY ssh/home/frappe/.ssh
+RUN chmod 400 /home/frappe/.ssh/*
 RUN chown -R frappe:frappe /home/frappe
 
 USER frappe
