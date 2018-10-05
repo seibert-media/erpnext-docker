@@ -34,3 +34,9 @@ versions:
 
 open:
 	open http://127.0.0.1:8000
+
+exec:
+	docker exec -ti erpnext bash
+
+rootexec:
+	docker exec -ti --user 0 erpnext bash

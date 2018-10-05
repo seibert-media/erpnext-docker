@@ -5,7 +5,7 @@ set -o nounset
 set -o pipefail
 set -o errtrace
 
-if [ "$1" = 'bench' ] && [ "$2" = 'start' ]; then
+if [ "$1" = '/usr/bin/supervisord' ]; then
 	echo "setup $@"
 
 	python -c 'import sys; print("python encoding is "+sys.stdout.encoding)'
