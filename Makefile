@@ -14,7 +14,7 @@ build:
 	for i in $(VERSIONS); do \
 		tags="$$tags -t $(REGISTRY)/$(IMAGE):$$i"; \
 	done; \
-	echo "docker build --no-cache --rm=true $$tags ."
+	echo "docker build --no-cache --rm=true $$tags ."; \
 	docker build --no-cache --rm=true $$tags .
 
 clean:
