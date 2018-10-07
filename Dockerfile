@@ -97,7 +97,6 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY nginx.conf /etc/nginx/sites-available/default
 RUN rm -rf /home/frappe/.ssh
 COPY bench-repo .
-RUN find /home/frappe/bench-repo -name .git -type d | xargs rm -rf
 RUN chown -R frappe:frappe /home/frappe/*
 COPY entrypoint.sh /entrypoint.sh
 
