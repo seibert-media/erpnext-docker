@@ -38,5 +38,5 @@ open:
 exec:
 	docker exec -ti erpnext bash
 
-rootexec:
-	docker exec -ti --user 0 erpnext bash
+logs:
+	docker logs erpnext -f
