@@ -83,6 +83,7 @@ RUN chown -R frappe:frappe /home/frappe
 
 USER frappe
 RUN bench init /home/frappe/bench-repo --ignore-exist --skip-redis-config-generation --frappe-branch ${FRAPPE_VERSION}
+RUN /home/frappe/bench-repo/env/bin/pip install html5lib
 
 WORKDIR /home/frappe/bench-repo
 RUN bench get-app erpnext https://github.com/frappe/erpnext.git --branch ${ERPNEXT_VERSION}
