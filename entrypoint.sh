@@ -18,6 +18,7 @@ if [ "$1" = '/usr/bin/supervisord' ]; then
 	sites/site1.local/private \
 	sites/site1.local/private/files \
 	sites/site1.local/private/backups
+	chown -R frappe:frappe sites
 
 	echo "set ROOT_PASSWORD to ***"
 	sed -i "s/{{ROOT_PASSWORD}}/${ROOT_PASSWORD}/" sites/common_site_config.json

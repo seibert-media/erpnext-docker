@@ -92,13 +92,13 @@ RUN bench get-app seibertmedia ssh://git@bitbucket.org:22/seibertmedia-alle/seib
 RUN bench get-app banana https://github.com/bborbe/erpnext-banana-app.git --branch master
 
 USER root
+RUN rm -rf /home/frappe/.ssh
 RUN mkdir -p /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY nginx.conf /etc/nginx/sites-available/default
-RUN rm -rf /home/frappe/.ssh
 COPY bench-repo .
-RUN chown -R frappe:frappe /home/frappe/*
-COPY entrypoint.sh /entrypoint.sh
 
+COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
+
 CMD ["/usr/bin/supervisord"]
