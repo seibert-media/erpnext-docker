@@ -54,6 +54,8 @@ RUN set -x \
 	xfonts-75dpi \
 	xfonts-base \
 	zlib1g-dev \
+	supervisor \
+	nginx \
 	&& DEBIAN_FRONTEND=noninteractive apt-get autoremove --yes \
 	&& DEBIAN_FRONTEND=noninteractive apt-get clean
 
@@ -91,10 +93,12 @@ RUN bench get-app banana https://github.com/bborbe/erpnext-banana-app.git --bran
 
 USER root
 RUN rm -rf /home/frappe/.ssh
+RUN mkdir -p /var/log/supervisor
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY nginx.conf /etc/nginx/sites-available/default
 COPY bench-repo .
-RUN chown -R frappe:frappe /home/frappe/*
-USER frappe
-COPY entrypoint.sh /entrypoint.sh
 
+COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["bench","start"]
+
+CMD ["/usr/bin/supervisord"]

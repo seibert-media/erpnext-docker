@@ -8,6 +8,15 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 2.1.0
+
+- remove set of some proxy header
+- move chown to entrypoint
+
+## 2.0.0
+
+- use supervisord to start nginx and gunicron
+
 ## 1.1.0
 
 - add seibertmedia app 

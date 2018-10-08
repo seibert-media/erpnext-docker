@@ -5,7 +5,7 @@ set -o nounset
 set -o pipefail
 set -o errtrace
 
-if [ "$1" = 'bench' ] && [ "$2" = 'start' ]; then
+if [ "$1" = '/usr/bin/supervisord' ]; then
 	echo "setup $@"
 
 	python -c 'import sys; print("python encoding is "+sys.stdout.encoding)'
@@ -18,6 +18,7 @@ if [ "$1" = 'bench' ] && [ "$2" = 'start' ]; then
 	sites/site1.local/private \
 	sites/site1.local/private/files \
 	sites/site1.local/private/backups
+	chown -R frappe:frappe sites
 
 	echo "set ROOT_PASSWORD to ***"
 	sed -i "s/{{ROOT_PASSWORD}}/${ROOT_PASSWORD}/" sites/common_site_config.json

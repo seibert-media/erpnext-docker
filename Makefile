@@ -14,16 +14,18 @@ build:
 	for i in $(VERSIONS); do \
 		tags="$$tags -t $(REGISTRY)/$(IMAGE):$$i"; \
 	done; \
-	#docker build --no-cache --rm=true $$tags .
-	imagebuilder $$tags -f Dockerfile:Dockerfile .
+	echo "docker build --no-cache --rm=true $$tags ."; \
+	docker build --no-cache --rm=true $$tags .
 
 clean:
 	@for i in $(VERSIONS); do \
+		echo "docker rmi $(REGISTRY)/$(IMAGE):$$i"; \
 		docker rmi $(REGISTRY)/$(IMAGE):$$i || true; \
 	done
 
 upload:
 	@for i in $(VERSIONS); do \
+		echo "docker push $(REGISTRY)/$(IMAGE):$$i"; \
 		docker push $(REGISTRY)/$(IMAGE):$$i; \
 	done
 
@@ -31,4 +33,10 @@ versions:
 	@for i in $(VERSIONS); do echo $$i; done;
 
 open:
-	open http://127.0.0.1:8000
+	open http://127.0.0.1:8080
+
+exec:
+	docker exec -ti erpnext bash
+
+logs:
+	docker logs erpnext -f
