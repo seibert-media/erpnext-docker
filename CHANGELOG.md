@@ -10,6 +10,7 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 
 ## 2.1.0
 
+- remove set of some proxy header
 - move chown to entrypoint
 
 ## 2.0.0
