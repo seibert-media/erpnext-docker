@@ -6,7 +6,7 @@ LABEL maintainer="//SEIBERT/MEDIA GmbH  <docker@seibert-media.net>"
 ARG FRAPPE_VERSION=v10.1.49
 ARG ERPNEXT_VERSION=v10.1.54
 ARG BENCH_VERSION=master
-ARG SEIBERTMEDIA_APP_VERSION=1.0.0
+ARG SEIBERTMEDIA_APP_VERSION=1.1.0
 
 RUN set -x \
 	&& DEBIAN_FRONTEND=noninteractive apt-get update --quiet \
