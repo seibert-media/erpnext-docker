@@ -46,9 +46,6 @@ if [ "$1" = '/usr/bin/supervisord' ]; then
 	echo "uninstall apps ..."
 	bench --site site1.local uninstall-app banana -y || true
 
-	echo "run backup for all sites in the bench"
-	bench --site all backup
-
 	echo "run migrations for all sites in the bench"
 	bench --site all migrate
 
