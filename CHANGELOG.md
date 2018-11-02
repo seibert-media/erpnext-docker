@@ -8,6 +8,10 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 2.4.0
+
+- Allow configure encryption key for mail.
+
 ## 2.3.0
 
 - Remove Backup

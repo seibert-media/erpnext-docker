@@ -35,6 +35,9 @@ if [ "$1" = '/usr/bin/supervisord' ]; then
 	echo "set DB_PASSWORD to ***"
 	sed -i "s/{{DB_PASSWORD}}/${DB_PASSWORD}/" sites/site1.local/site_config.json
 
+	echo "set ENCRYPTION_KEY to ***"
+	sed -i "s/{{ENCRYPTION_KEY}}/${ENCRYPTION_KEY}/" sites/site1.local/site_config.json
+
 	echo "set bench values"
 	bench set-mariadb-host "${DB_HOST}"
 	bench set-admin-password "${ADMIN_PASSWORD}"

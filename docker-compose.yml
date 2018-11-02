@@ -57,6 +57,7 @@ services:
     - DB_HOST=mariadb
     - DB_NAME=1bd3e0294da19198
     - DB_PASSWORD=iAlcDxokJhGvpxaK
+    - ENCRYPTION_KEY=vZUk5YjEeRdQkGWOFecw2TBFIvmxB7gJ7lZwIE3S9Ds
     extra_hosts:
     - "site1.local:127.0.0.1"
     stdin_open: true
