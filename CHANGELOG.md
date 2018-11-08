@@ -8,6 +8,10 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 2.4.2
+
+- Fix docker exists check
+
 ## 2.4.1
 
 - Update frappe to v10.1.59 
