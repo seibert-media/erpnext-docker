@@ -1,9 +1,9 @@
-REGISTRY ?= docker.seibert-media.net
-IMAGE    ?= seibertmedia/erpnext
-VERSION  ?= latest
-VERSIONS = $(VERSION)
-
-VERSIONS += $(shell git fetch --tags; git tag -l --points-at HEAD)
+REGISTRY     ?= docker.seibert-media.net
+IMAGE        ?= seibertmedia/erpnext
+VERSION      ?= latest
+VERSIONS     = $(VERSION)
+VERSIONS     += $(shell git fetch --tags; git tag -l --points-at HEAD)
+PASSWORDFILE ?= /home/jenkins/.docker/seibertmedia-password
 
 default: build
 
@@ -25,8 +25,19 @@ clean:
 
 upload:
 	@for i in $(VERSIONS); do \
-		echo "docker push $(REGISTRY)/$(IMAGE):$$i"; \
-		docker push $(REGISTRY)/$(IMAGE):$$i; \
+		exists=`docker-remote-tag-exists \
+			-registry=${REGISTRY} \
+			-username=seibertmedia \
+			-passwordfile="${PASSWORDFILE}" \
+			-repository="${IMAGE}" \
+			-tag="$$i" \
+			-alsologtostderr \
+			-v=0`; \
+		if [ "$${exists}" = "false" ]; then \
+			docker push $(REGISTRY)/$(IMAGE):$$i; \
+		else \
+			echo "$(REGISTRY)/$(IMAGE):$$i already exists => skip"; \
+		fi; \
 	done
 
 versions:
