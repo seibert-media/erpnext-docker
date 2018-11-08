@@ -33,7 +33,7 @@ upload:
 			-tag="$$i" \
 			-alsologtostderr \
 			-v=0`; \
-		if [ "$${exists}" = "false" ]; then \
+		if [ "$${exists}" = "false" ] || [ "$$i" = "latest" ]; then \
 			docker push $(REGISTRY)/$(IMAGE):$$i; \
 		else \
 			echo "$(REGISTRY)/$(IMAGE):$$i already exists => skip"; \
