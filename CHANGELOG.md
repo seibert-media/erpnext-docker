@@ -8,6 +8,11 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 2.5.0
+
+- Add Docker-Compose file for development
+- Run entrypoint for every command  
+
 ## 2.4.2
 
 - Fix docker exists check

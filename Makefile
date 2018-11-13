@@ -35,7 +35,7 @@ upload:
 			-tag="$$i" \
 			-alsologtostderr \
 			-v=0`; \
-		if [ "$${exists}" = "false" ] || [ "$$i" = "latest" ]; then \
+		if [ "$${exists}" = "false" ] || [ "$$i" = "master" ]; then \
 			docker push $(REGISTRY)/$(IMAGE):$$i; \
 		else \
 			echo "$(REGISTRY)/$(IMAGE):$$i already exists => skip"; \
@@ -53,3 +53,11 @@ exec:
 
 logs:
 	docker logs erpnext -f
+
+dev:
+	@if [ ! -d "./apps/seibertmedia" ]; then \
+		echo "please checkout seibertmedia app to apps/seibertmedia"; \
+		exit 1; \
+	fi
+	docker-compose -f docker-compose-dev.yml up -d
+	docker-compose logs -f
