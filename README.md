@@ -29,6 +29,21 @@ Open in Browser
 
 Login with Administrator and 123
 
+## Dev
+
+Clone seibertmedia app into docker directory:
+```
+mkdir apps
+cd apps
+git clone git@bitbucket.org:seibertmedia-alle/seibertmedia-app.git
+mv seibertmedia-app seibertmedia
+```
+
+Start container in dev-mode:
+```
+make dev
+```
+
 ## Links
 
 inspired by [https://github.com/frappe/frappe_docker](https://github.com/frappe/frappe_docker)
