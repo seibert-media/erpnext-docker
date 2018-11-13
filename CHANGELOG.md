@@ -8,6 +8,11 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 1.2.0
+
+- Remove test alerts
+- Remove Highrise and Billomat
+
 ## 1.1.0
 
 - Remove print button from Sales Invoice 
