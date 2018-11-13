@@ -53,3 +53,11 @@ exec:
 
 logs:
 	docker logs erpnext -f
+
+dev:
+	@if [ ! -d "./apps/seibertmedia" ]; then \
+		echo "please checkout seibertmedia app to apps/seibertmedia"; \
+		exit 1; \
+	fi
+	docker-compose -f docker-compose-dev.yml up -d
+	docker-compose logs -f
