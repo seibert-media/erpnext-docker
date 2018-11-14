@@ -6,7 +6,7 @@
  * The templates need to have the naming scheme that they end in ' - Intro' respectively ' - Outro'.
  */
 
-var printPreviewLanguageSelectorIdentifier = '.languages';
+let printPreviewLanguageSelectorIdentifier = '.languages';
 
 frappe.ui.form.on(
     'Sales Order',  // Name of the form
@@ -31,7 +31,7 @@ frappe.ui.form.on(
          * @param frm  The current form object
          */
         renderTemplate: function (frm) {
-            var defaultTemplate = frm.meta.default_print_format;  // e.g. 'Sales Invoice Template'
+            let defaultTemplate = frm.meta.default_print_format;  // e.g. 'Sales Invoice Template'
 
             // Render and insert `introtext`
             frappe.call({
@@ -71,7 +71,7 @@ frappe.ui.form.on(
          * @returns {String}
          */
         retrieveTemplateLanguage: function () {
-            var selectedLanguage = $(printPreviewLanguageSelectorIdentifier).val();
+            let selectedLanguage = $(printPreviewLanguageSelectorIdentifier).val();
             return selectedLanguage ? selectedLanguage : 'de';
         }
     }
