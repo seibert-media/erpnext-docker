@@ -71,7 +71,8 @@ frappe.ui.form.on(
          * @returns {String}
          */
         retrieveTemplateLanguage: function () {
-            return $(printPreviewLanguageSelectorIdentifier).val();
+            var selectedLanguage = $(printPreviewLanguageSelectorIdentifier).val();
+            return selectedLanguage ? selectedLanguage : 'de';
         }
     }
 );
