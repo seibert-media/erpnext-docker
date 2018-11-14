@@ -6,10 +6,11 @@
  * The templates need to have the naming scheme that they end in ' - Intro' respectively ' - Outro'.
  */
 
-let printPreviewLanguageSelectorIdentifier = '.languages';
+const formName = 'Sales Invoice';
+const fieldNameTemplateLanguage = 'template_language';
 
 frappe.ui.form.on(
-    'Sales Invoice',  // Name of the form
+    formName,  // Name of the form
     {
         /**
          * Gets executed upon loading the form
@@ -17,13 +18,7 @@ frappe.ui.form.on(
          * @param frm  The current form object
          */
         onload: function (frm) {
-            // Directly render the template on page load
-            frm.events.renderTemplate(frm);
-
-            // Re-render the template upon changing the template language
-            $(printPreviewLanguageSelectorIdentifier).on('change', function () {
-                frm.events.renderTemplate(frm);
-            });
+            frm.events.renderTemplate(frm);  // Directly render the template on page load
         },
         /**
          * Renders the intro and outro templates
@@ -40,7 +35,7 @@ frappe.ui.form.on(
                     doc: frm.doc,
                     print_format: defaultTemplate + ' - Intro',
                     no_letterhead: 0,
-                    _lang: frm.events.retrieveTemplateLanguage(),
+                    _lang: frm.events.retrieveTemplateLanguage(frm),
                 },
                 callback: function (res) {
                     if (!res.exc) {
@@ -56,7 +51,7 @@ frappe.ui.form.on(
                     doc: frm.doc,
                     print_format: defaultTemplate + ' - Outro',
                     no_letterhead: 0,
-                    _lang: frm.events.retrieveTemplateLanguage(),
+                    _lang: frm.events.retrieveTemplateLanguage(frm),
                 },
                 callback: function (res) {
                     if (!res.exc) {
@@ -70,10 +65,28 @@ frappe.ui.form.on(
          *
          * @returns {String}
          */
-        retrieveTemplateLanguage: function () {
-            let selectedLanguage = $(printPreviewLanguageSelectorIdentifier).val();
-            return selectedLanguage ? selectedLanguage : 'de';
+        retrieveTemplateLanguage: function (frm) {
+            let selectedLanguage = frm.doc[fieldNameTemplateLanguage];
+            if (selectedLanguage === 'Deutsch') {
+                return 'de';
+            } else if (selectedLanguage === 'English') {
+                return 'en';
+            } else {
+                return 'de';
+            }
         }
+    }
+);
+
+/**
+ * Upon selecting a different value via the `fieldNameTemplateLanguage` 'Select' field,
+ * re-render both templates.
+ */
+frappe.ui.form.on(
+    formName,  // Name of the form
+    fieldNameTemplateLanguage,  // Name of 'Select' field
+    function (frm) {
+        frm.events.renderTemplate(frm);
     }
 );
 
