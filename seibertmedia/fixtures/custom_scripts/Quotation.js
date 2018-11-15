@@ -6,7 +6,7 @@
  * The templates need to have the naming scheme that they end in ' - Intro' respectively ' - Outro'.
  */
 
-const formName = 'Sales Invoice';
+const formName = 'Quotation';
 const fieldNameTemplateLanguage = 'template_language';
 
 frappe.ui.form.on(
@@ -89,15 +89,3 @@ frappe.ui.form.on(
         frm.events.renderTemplate(frm);
     }
 );
-
-
-/**
- * TODO: Please complete the info what this does!
- *
- * TICKET:
- *
- * FUNCTIONALITY:
- *
- */
-
-cur_frm.page.views.print.find('.btn-print-print').remove();
