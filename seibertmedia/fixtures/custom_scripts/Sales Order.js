@@ -89,15 +89,3 @@ frappe.ui.form.on(
         frm.events.renderTemplate(frm);
     }
 );
-
-
-/**
- * TODO: Please complete the info what this does!
- *
- * TICKET:
- *
- * FUNCTIONALITY:
- *
- */
-
-cur_frm.page.views.print.find('.btn-print-print').remove();
