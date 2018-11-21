@@ -8,6 +8,10 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 1.3.1
+
+- Add manual rerendering of introtext and outrotext
+
 ## 1.3.0
 
 - Add introtext and outrotext rendering for the three main form types
