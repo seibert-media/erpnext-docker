@@ -7,6 +7,7 @@
  */
 
 const formName = 'Quotation';
+const renderTemplatesButton = 'render_templates';
 const fieldNameTemplateLanguage = 'template_language';
 
 frappe.ui.form.on(
@@ -75,6 +76,17 @@ frappe.ui.form.on(
                 return 'de';
             }
         }
+    }
+);
+
+/**
+ * Re-render the templates upon pressing the respective button
+ */
+frappe.ui.form.on(
+    formName,  // Name of the form
+    renderTemplatesButton,  // Name of the button
+    function (frm) {
+        frm.events.renderTemplate(frm);
     }
 );
 
