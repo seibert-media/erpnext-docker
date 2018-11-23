@@ -17,36 +17,33 @@ services:
 
   redis-cache:
     image: redis:4.0.11-alpine
-
     volumes:
     - ./redis-conf/redis_cache.conf:/etc/conf.d/redis.conf
-
     command: ["redis-server","/etc/conf.d/redis.conf"]
-
     container_name: redis-cache
+    sysctls:
+      net.core.somaxconn: '511'
 
   redis-queue:
     image: redis:4.0.11-alpine
-
     volumes:
     - ./redis-conf/redis_queue.conf:/etc/conf.d/redis.conf
-
     command: ["redis-server","/etc/conf.d/redis.conf"]
-
     container_name: redis-queue
+    sysctls:
+      net.core.somaxconn: '511'
 
   redis-socketio:
     image: redis:4.0.11-alpine
-
     volumes:
     - ./redis-conf/redis_socketio.conf:/etc/conf.d/redis.conf
-
     command: ["redis-server","/etc/conf.d/redis.conf"]
-
     container_name: redis-socketio
+    sysctls:
+      net.core.somaxconn: '511'
 
   erpnext:
-    image: docker.seibert-media.net/seibertmedia/erpnext:master
+    image: docker.seibert-media.net/seibertmedia/erpnext:latest
     build:
       context: .
     volumes:
