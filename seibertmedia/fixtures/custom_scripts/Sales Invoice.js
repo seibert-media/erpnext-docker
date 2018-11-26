@@ -1,6 +1,6 @@
 frappe.provide("seibertmedia.invoice");
 
-class Composer{
+class PixelletterComposer{
     constructor(doc) {
         this.doc = doc;
     }
@@ -140,7 +140,7 @@ class Composer{
 
 cur_frm.page.views.print.find(".btn-print-print").remove();
 
-seibertmedia.invoice.pixelletterComposer = new Composer(cur_frm);
+seibertmedia.invoice.pixelletterComposer = new PixelletterComposer(cur_frm);
 
 frappe.ui.form.on("Sales Invoice", "refresh", function (frm) {
     frm.page.add_menu_item("Pixelletter", function () {
