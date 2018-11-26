@@ -8,7 +8,6 @@ class PixelletterComposer{
         var me = this;
         this.dialog = new frappe.ui.Dialog({
             title: "Send Pixelletter", fields: [
-                {label: "Primary Attachment", fieldtype: "Data", fieldname: "primary_attachment"},
                 {
                     label: __("Select Attachments"), fieldtype: "HTML",
                     fieldname: "select_attachments"
