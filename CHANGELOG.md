@@ -8,6 +8,11 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 1.3.0
+- Added Pixelletter DocType
+- Added logic for pixelletter sender
+- Added Pixelletter button to Invoice Doctype with dialog
+
 ## 1.2.0
 
 - Remove test alerts
