@@ -147,18 +147,22 @@ class PixelletterComposer{
  */
 
 const formName = 'Sales Invoice';
+const keepTemplatesCheckbox = 'keep_custom_templates';
+const renderTemplatesButton = 'render_templates';
 const fieldNameTemplateLanguage = 'template_language';
 
 frappe.ui.form.on(
     formName,  // Name of the form
     {
-        /**
-         * Gets executed upon loading the form
-         *
-         * @param frm  The current form object
-         */
         onload: function (frm) {
-            frm.events.renderTemplate(frm);  // Directly render the template on page load
+            if (frm.doc[keepTemplatesCheckbox] !== 1) {  // Only if the user did not check the box
+                frm.events.renderTemplate(frm);  // Directly render the template on page load
+            }
+        },
+        after_save: function (frm) {
+            if (frm.doc[keepTemplatesCheckbox] !== 1) {  // Only if the user did not check the box
+                frm.events.renderTemplate(frm);  // Render the template after saving the form
+            }
         },
         /**
          * Renders the intro and outro templates
@@ -219,6 +223,17 @@ frappe.ui.form.on(
 );
 
 /**
+ * Re-render the templates upon pressing the respective button
+ */
+frappe.ui.form.on(
+    formName,  // Name of the form
+    renderTemplatesButton,  // Name of the button
+    function (frm) {
+        frm.events.renderTemplate(frm);
+    }
+);
+
+/**
  * Upon selecting a different value via the `fieldNameTemplateLanguage` 'Select' field,
  * re-render both templates.
  */
@@ -259,4 +274,3 @@ frappe.ui.form.on("Sales Invoice", "refresh", function (frm) {
         seibertmedia.invoice.pixelletterComposer.setup_attach()
     });
 });
-
