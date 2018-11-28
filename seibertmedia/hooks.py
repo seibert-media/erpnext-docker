@@ -10,3 +10,10 @@ app_icon = "octicon octicon-file-directory"
 app_color = "grey"
 app_email = "info@seibert-media.net"
 app_license = "MIT"
+
+doctype_js = {
+    'Quotation': 'formscripts/quotation.js',
+    'Sales Invoice': 'formscripts/sales_invoice.js',
+    'Sales Order': 'formscripts/sales_order.js',
+}
+

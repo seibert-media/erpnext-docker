@@ -9,8 +9,9 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * PATCH version when you make backwards-compatible bug fixes.
 
 ## 1.3.0
-
-- Add introtext and outrotext rendering for the three main form types
+- Added Pixelletter DocType
+- Added logic for pixelletter sender
+- Added Pixelletter button to Invoice Doctype with dialog
 
 ## 1.2.0
 
