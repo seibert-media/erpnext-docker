@@ -8,6 +8,11 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 2.7.0
+
+- Fix log permissions
+- Update Seibert-Media App to 1.3.3 intro and outro text
+
 ## 2.6.0
 
 - Update Seibert-Media App to 1.3.0 for Pixelletter
