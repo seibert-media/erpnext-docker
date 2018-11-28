@@ -60,4 +60,4 @@ dev:
 		exit 1; \
 	fi
 	docker-compose -f docker-compose-dev.yml up -d
-	docker-compose logs -f
+	docker-compose -f docker-compose-dev.yml logs -f --tail=10 
