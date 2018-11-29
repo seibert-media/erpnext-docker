@@ -7,18 +7,22 @@
  */
 
 const formName = 'Quotation';
+const keepTemplatesCheckbox = 'keep_custom_templates';
+const renderTemplatesButton = 'render_templates';
 const fieldNameTemplateLanguage = 'template_language';
 
 frappe.ui.form.on(
     formName,  // Name of the form
     {
-        /**
-         * Gets executed upon loading the form
-         *
-         * @param frm  The current form object
-         */
         onload: function (frm) {
-            frm.events.renderTemplate(frm);  // Directly render the template on page load
+            if (frm.doc[keepTemplatesCheckbox] !== 1) {  // Only if the user did not check the box
+                frm.events.renderTemplate(frm);  // Directly render the template on page load
+            }
+        },
+        after_save: function (frm) {
+            if (frm.doc[keepTemplatesCheckbox] !== 1) {  // Only if the user did not check the box
+                frm.events.renderTemplate(frm);  // Render the template after saving the form
+            }
         },
         /**
          * Renders the intro and outro templates
@@ -75,6 +79,17 @@ frappe.ui.form.on(
                 return 'de';
             }
         }
+    }
+);
+
+/**
+ * Re-render the templates upon pressing the respective button
+ */
+frappe.ui.form.on(
+    formName,  // Name of the form
+    renderTemplatesButton,  // Name of the button
+    function (frm) {
+        frm.events.renderTemplate(frm);
     }
 );
 
