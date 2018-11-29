@@ -7,12 +7,12 @@ class PixelletterComposer{
     make() {
         var me = this;
         this.dialog = new frappe.ui.Dialog({
-            title: "Send Pixelletter", fields: [
+            title: "Send via Pixelletter", fields: [
                 {
                     label: __("Select Attachments"), fieldtype: "HTML",
                     fieldname: "select_attachments"
                 },
-            ], primary_action_label: "Send Pixelletter", primary_action: function() {
+            ], primary_action_label: "Send via Pixelletter", primary_action: function() {
                 if (cur_frm && !frappe.model.can_email(me.doc.doctype, cur_frm)) {
                     frappe.msgprint(__("You are not allowed to send emails related to this document"));
                     return;
@@ -36,7 +36,8 @@ class PixelletterComposer{
                         _lang: me.lang_code,
                     },
                     callback: function (resp) {
-                        me.dialog.hide()
+                        me.dialog.hide();
+                        frappe.msgprint("<p>Your Pixelletter was enqueued and will be sent within the next 60min.</p><p>Pixelletter ID: <a href=\"#Form/Pixelletter/" + resp.message.name + "\">" + resp.message.name + "</a></p>", "Pixelletter sent");
                     }
                 });
             }
