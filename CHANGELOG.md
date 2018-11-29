@@ -8,6 +8,10 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 1.3.4
+
+- Used file manager for Pixelletter save action
+
 ## 1.3.3
 
 - Add the possibility to retain custom, edited template texts
