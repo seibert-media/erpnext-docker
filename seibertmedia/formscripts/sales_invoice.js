@@ -37,7 +37,7 @@ class PixelletterComposer{
                     },
                     callback: function (resp) {
                         me.dialog.hide();
-                        frappe.msgprint("Your Pixelletter was enqueued and will be sent within the next 60min.", "Pixelletter sent");
+                        frappe.msgprint("<p>Your Pixelletter was enqueued and will be sent within the next 60min.</p><p>Pixelletter ID: <a href=\"#Form/Pixelletter/" + resp.message.name + "\">" + resp.message.name + "</a></p>", "Pixelletter sent");
                     }
                 });
             }

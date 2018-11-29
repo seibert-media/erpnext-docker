@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) 2018, //SEIBERT/MEDIA GmbH and contributors
 # For license information, please see license.txt
+from __future__ import unicode_literals
 
 import frappe
 import json
@@ -8,9 +9,8 @@ import json
 from frappe.model.document import Document
 # Change to file.py methods as soon as v12 will be used
 from frappe.utils.file_manager import save_file
-
 from six import string_types
-from __future__ import unicode_literals
+
 
 class Pixelletter(Document):
     pass
@@ -50,7 +50,7 @@ def make(doctype=None, name=None, send_email=False, print_html=None, print_forma
         for a in pdfs:
             if a.get("print_format_attachment") == 1:
                 print_format_file = frappe.attach_print(doctype = a.get("doctype"), name = a.get("name"), print_format=a.get("print_format"))
-                save_file(print_format_file.get("fname"), print_format_file.get("fcontent"), comm.doctype, comm.name, is_private=True)
+                save_file(print_format_file.get("fname"), print_format_file.get("fcontent"), comm.doctype, comm.name, is_private=True, df=attach_field)
     frappe.db.commit()
 
     return {
