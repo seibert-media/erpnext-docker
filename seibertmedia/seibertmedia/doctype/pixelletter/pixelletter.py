@@ -6,6 +6,7 @@ import frappe
 import json
 
 from frappe.model.document import Document
+# Change to file.py methods as soon as v12 will be used
 from frappe.utils.file_manager import save_file
 
 from six import string_types
