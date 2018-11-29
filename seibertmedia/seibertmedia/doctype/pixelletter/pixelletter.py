@@ -2,30 +2,17 @@
 # Copyright (c) 2018, //SEIBERT/MEDIA GmbH and contributors
 # For license information, please see license.txt
 
-from __future__ import unicode_literals
 import frappe
-from frappe.model.document import Document
-from frappe import attach_print
 import json
-from six import string_types
-from frappe.utils import (get_url, get_formatted_email, cint,
-                          validate_email_add, split_emails, time_diff_in_seconds, parse_addr, call_hook_method)
-from frappe.utils.file_manager import get_file
-from frappe.utils import get_files_path
-import os
-from six import text_type
 
+from frappe.model.document import Document
+from frappe.utils.file_manager import save_file
+
+from six import string_types
+from __future__ import unicode_literals
 
 class Pixelletter(Document):
     pass
-
-def get_folder(self, folder_name, parent_folder="Home"):
-    return frappe.get_doc({
-        "doctype": "File",
-        "file_name": folder_name,
-        "is_folder": 1,
-        "folder": parent_folder
-    }).insert()
 
 @frappe.whitelist()
 def make(doctype=None, name=None, send_email=False, print_html=None, print_format=None, attachments='[]', print_letterhead=True, attach_field=None):
@@ -62,37 +49,12 @@ def make(doctype=None, name=None, send_email=False, print_html=None, print_forma
         for a in pdfs:
             if a.get("print_format_attachment") == 1:
                 print_format_file = frappe.attach_print(doctype = a.get("doctype"), name = a.get("name"), print_format=a.get("print_format"))
-                _file = frappe.get_doc({
-                    "doctype": "File",
-                    "file_name": print_format_file.get("fname"),
-                    "attached_to_doctype": comm.doctype,
-                    "attached_to_name": comm.name,
-                    "attached_to_field": attach_field,
-                    "is_private": True,
-                    "content": print_format_file.get("fcontent"),
-                    "decode": True})
-                write_file(_file)
-                _file.file_url = "/private/files/{0}".format(_file.file_name)
-                _file.save()
+                save_file(print_format_file.get("fname"), print_format_file.get("fcontent"), comm.doctype, comm.name, is_private=True)
     frappe.db.commit()
 
     return {
         "name": comm.name,
     }
-
-def write_file(_file):
-    """write file to disk with a random name (to compare)"""
-    file_path = get_files_path(is_private=_file.is_private)
-
-    # create directory (if not exists)
-    frappe.create_folder(file_path)
-    # write the file
-    if isinstance(_file.content, text_type):
-        _file.content = _file.content.encode()
-    with open(os.path.join(file_path.encode('utf-8'), _file.file_name.encode('utf-8')), 'wb+') as f:
-        f.write(_file.content)
-
-    return get_files_path(_file.file_name, is_private=_file.is_private)
 
 def add_attachments(name, attachments):
     '''Add attachments to the given Communiction'''
