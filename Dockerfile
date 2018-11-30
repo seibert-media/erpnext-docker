@@ -5,7 +5,7 @@ LABEL maintainer="//SEIBERT/MEDIA GmbH  <docker@seibert-media.net>"
 ARG FRAPPE_VERSION=v10.1.64
 ARG ERPNEXT_VERSION=v10.1.72
 ARG BENCH_VERSION=master
-ARG SEIBERTMEDIA_APP_VERSION=1.3.0
+ARG SEIBERTMEDIA_APP_VERSION=1.3.4
 
 RUN set -x \
 	&& DEBIAN_FRONTEND=noninteractive apt-get update --quiet \
@@ -90,6 +90,8 @@ RUN bench get-app seibertmedia ssh://git@bitbucket.org:22/seibertmedia-alle/seib
 
 # TODO: remove banana app
 RUN bench get-app banana https://github.com/bborbe/erpnext-banana-app.git --branch master
+
+RUN pip install uwsgi --install-option="--install-scripts=$PWD/env/bin"
 
 USER root
 RUN rm -rf /home/frappe/.ssh
