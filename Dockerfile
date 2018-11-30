@@ -5,7 +5,7 @@ LABEL maintainer="//SEIBERT/MEDIA GmbH  <docker@seibert-media.net>"
 ARG FRAPPE_VERSION=v10.1.64
 ARG ERPNEXT_VERSION=v10.1.72
 ARG BENCH_VERSION=master
-ARG SEIBERTMEDIA_APP_VERSION=1.3.3
+ARG SEIBERTMEDIA_APP_VERSION=1.3.4
 
 RUN set -x \
 	&& DEBIAN_FRONTEND=noninteractive apt-get update --quiet \
@@ -82,7 +82,7 @@ RUN chown -R frappe:frappe /home/frappe
 
 USER frappe
 RUN bench init /home/frappe/bench-repo --ignore-exist --skip-redis-config-generation --frappe-branch ${FRAPPE_VERSION}
-RUN /home/frappe/bench-repo/env/bin/pip install html5lib
+RUN /home/frappe/bench-repo/env/bin/pip install html5lib uwsgi
 
 WORKDIR /home/frappe/bench-repo
 RUN bench get-app erpnext https://github.com/frappe/erpnext.git --branch ${ERPNEXT_VERSION}
