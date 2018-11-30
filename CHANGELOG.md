@@ -11,6 +11,7 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 ## 2.8.0
 
 - Update Seibert-Medai App to 1.3.4 Pixelletter improvment
+- Changed from Gunicorn to uwsgi
 
 ## 2.7.0
 
