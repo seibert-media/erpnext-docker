@@ -30,6 +30,12 @@ def make(doctype=None, name=None, send_email=False, print_html=None, print_forma
     })
     comm.insert(ignore_permissions=True)
 
+    if isinstance(attachments, string_types):
+        attachments = json.loads(attachments)
+
+    if attachments:
+        add_attachments(comm.name, attachments)
+
     doc = frappe.get_doc(doctype, name)
 
     if not doc.has_permission():
@@ -39,14 +45,9 @@ def make(doctype=None, name=None, send_email=False, print_html=None, print_forma
         # if no reference given, then send it against the communication
         comm.db_set(dict(reference_doctype='Pixelletter', reference_name=comm.name))
 
-    if isinstance(attachments, string_types):
-        attachments = json.loads(attachments)
 
     if print_html or print_format:
         pdfs.append({"print_format_attachment":1, "doctype":comm.reference_doctype, "name":comm.reference_name, "print_format":print_format, "html":print_html})
-
-    if attachments:
-        add_attachments(comm.name, attachments)
 
     if pdfs:
         for a in pdfs:
