@@ -12,6 +12,7 @@ from frappe.utils.file_manager import save_file
 from six import string_types
 
 
+
 class Pixelletter(Document):
     pass
 
@@ -24,7 +25,7 @@ def make(doctype=None, name=None, send_email=False, print_html=None, print_forma
         "doctype":"Pixelletter",
         "reference_doctype": doctype,
         "reference_name": name,
-        "has_attachment": 1 if attachments else 0
+        "has_attachment": 1
     })
     comm.insert(ignore_permissions=True)
 
@@ -50,7 +51,8 @@ def make(doctype=None, name=None, send_email=False, print_html=None, print_forma
         for a in pdfs:
             if a.get("print_format_attachment") == 1:
                 print_format_file = frappe.attach_print(doctype = a.get("doctype"), name = a.get("name"), print_format=a.get("print_format"))
-                save_file(print_format_file.get("fname"), print_format_file.get("fcontent"), comm.doctype, comm.name, is_private=True, df=attach_field)
+                _file = save_file(print_format_file.get("fname"), print_format_file.get("fcontent"), comm.doctype, comm.name, is_private=True, df=attach_field)
+                comm.db_set({attach_field: _file.get("file_name")})
     frappe.db.commit()
 
     return {
