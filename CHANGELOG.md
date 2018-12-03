@@ -8,10 +8,13 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 2.10.0
+
+- Change uid from 1000 to 500
+
 ## 2.9.0
 
-- Rename user frappe to erpnext
-- Change uid from 1000 to 500
+- Updated Seibert-Media Appt to 1.3.5
 
 ## 2.8.0
 
