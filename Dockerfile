@@ -64,8 +64,8 @@ ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
 RUN locale-gen en_US.UTF-8
 
-RUN groupadd -g 1000 frappe
-RUN useradd -ms /bin/bash -u 1000 -g 1000 frappe
+RUN groupadd -g 500 frappe
+RUN useradd -ms /bin/bash -u 500 -g 500 frappe
 
 RUN curl --connect-timeout 10 --max-time 120 -sSL https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb > wkhtmltopdf.deb \
 	&& dpkg -i wkhtmltopdf.deb \
