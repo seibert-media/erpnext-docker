@@ -64,8 +64,8 @@ ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
 RUN locale-gen en_US.UTF-8
 
-RUN groupadd -g 500 erpnext
-RUN useradd -ms /bin/bash -u 500 -g 500 erpnext
+RUN groupadd -g 500 frappe
+RUN useradd -ms /bin/bash -u 500 -g 500 frappe
 
 RUN curl --connect-timeout 10 --max-time 120 -sSL https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb > wkhtmltopdf.deb \
 	&& dpkg -i wkhtmltopdf.deb \
@@ -78,9 +78,9 @@ RUN git clone -b ${BENCH_VERSION} https://github.com/frappe/bench.git bench-repo
 RUN pip install -e bench-repo
 COPY ssh /home/frappe/.ssh
 RUN chmod 400 /home/frappe/.ssh/*
-RUN chown -R erpnext:erpnext /home/frappe
+RUN chown -R frappe:frappe /home/frappe
 
-USER erpnext
+USER frappe
 RUN bench init /home/frappe/bench-repo --ignore-exist --skip-redis-config-generation --frappe-branch ${FRAPPE_VERSION}
 RUN /home/frappe/bench-repo/env/bin/pip install html5lib uwsgi
 
