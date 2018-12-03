@@ -25,7 +25,7 @@ def make(doctype=None, name=None, send_email=False, print_html=None, print_forma
         "doctype":"Pixelletter",
         "reference_doctype": doctype,
         "reference_name": name,
-        "has_attachment": 1 if attachments else 0
+        "has_attachment": 1
     })
     comm.insert(ignore_permissions=True)
 
