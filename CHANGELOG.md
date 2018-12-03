@@ -14,7 +14,7 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 
 ## 2.9.0
 
-- Updated Seibert-Media Appt to 1.3.5
+- Updated Seibert-Media App to 1.3.5
 
 ## 2.8.0
 
