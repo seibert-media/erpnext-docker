@@ -9,6 +9,10 @@ class PixelletterComposer{
         this.dialog = new frappe.ui.Dialog({
             title: "Send via Pixelletter", fields: [
                 {
+                    label: __("Inovice automatically attached, please attach additional pdf only!"), fieldtype: "HTML",
+                    fieldname: "description"
+                },
+                {
                     label: __("Select Attachments"), fieldtype: "HTML",
                     fieldname: "select_attachments"
                 },
@@ -65,6 +69,10 @@ class PixelletterComposer{
         });
         me.dialog.show();
     }
+    setup() {
+        this.setup_attach();
+        this.setup_description();
+    }
     setup_attach() {
         var fields = this.dialog.fields_dict;
         var attach = $(fields.select_attachments.wrapper);
@@ -102,13 +110,21 @@ class PixelletterComposer{
             +__("Select Attachments")+"</h6><div class='attach-list'></div>\
 			<p class='add-more-attachments'>\
 			<a class='text-muted small'><i class='octicon octicon-plus' style='font-size: 12px'></i> "
-            +__("Add Attachment")+"</a></p>").appendTo(attach.empty())
+            +__("Add Attachment")+"</a></p>").appendTo(attach.empty());
         attach.find(".add-more-attachments a").on('click',this,function() {
             me.upload = frappe.ui.get_upload_dialog(args);
+            $(me.upload.body).find(".file-upload .input-upload .input-upload-file").attr("accept", ".pdf");
+            $(me.upload.body).find(".web-link-wrapper").hide()
         });
 
         seibertmedia.invoice.pixelletterComposer.render_attach()
 
+    }
+    setup_description() {
+        var fields = this.dialog.fields_dict;
+        var description = $(fields.description.wrapper);
+
+        $("<h4 class='pixelletter-description'>Inovice automatically attached, please attach additional pdf only!</h4>").appendTo(description.empty())
     }
     render_attach(){
         var fields = this.dialog.fields_dict;
@@ -272,6 +288,6 @@ seibertmedia.invoice.pixelletterComposer = new PixelletterComposer(cur_frm);
 frappe.ui.form.on("Sales Invoice", "refresh", function (frm) {
     frm.page.add_menu_item("Pixelletter", function () {
         seibertmedia.invoice.pixelletterComposer.make();
-        seibertmedia.invoice.pixelletterComposer.setup_attach()
+        seibertmedia.invoice.pixelletterComposer.setup();
     });
 });
