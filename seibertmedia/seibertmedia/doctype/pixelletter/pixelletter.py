@@ -10,6 +10,8 @@ from frappe.model.document import Document
 # Change to file.py methods as soon as v12 will be used
 from frappe.utils.file_manager import save_file
 from six import string_types
+from pprint import pprint
+
 
 
 class Pixelletter(Document):
@@ -50,7 +52,10 @@ def make(doctype=None, name=None, send_email=False, print_html=None, print_forma
         for a in pdfs:
             if a.get("print_format_attachment") == 1:
                 print_format_file = frappe.attach_print(doctype = a.get("doctype"), name = a.get("name"), print_format=a.get("print_format"))
-                save_file(print_format_file.get("fname"), print_format_file.get("fcontent"), comm.doctype, comm.name, is_private=True, df=attach_field)
+                _file = save_file(print_format_file.get("fname"), print_format_file.get("fcontent"), comm.doctype, comm.name, is_private=True, df=attach_field)
+                d = dict()
+                d[attach_field] = _file.get("file_name")
+                comm.db_set(d)
     frappe.db.commit()
 
     return {
