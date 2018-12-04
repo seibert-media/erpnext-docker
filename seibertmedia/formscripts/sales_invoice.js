@@ -124,7 +124,7 @@ class PixelletterComposer{
         var fields = this.dialog.fields_dict;
         var description = $(fields.description.wrapper);
 
-        $("<h4 class='pixelletter-description'>Inovice automatically attached, please attach additional pdf only!</h4>").appendTo(description.empty())
+        $("<h4 class='pixelletter-description'>Invoice automatically attached, please attach additional pdf only!</h4>").appendTo(description.empty())
     }
     render_attach(){
         var fields = this.dialog.fields_dict;

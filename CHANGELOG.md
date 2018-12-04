@@ -8,6 +8,10 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 1.3.6
+
+- Improved check for custom intro and outro rendering
+
 ## 1.3.5
 
 - Added hint in dialog that inovice is already attached
