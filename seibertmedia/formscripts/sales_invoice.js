@@ -172,7 +172,7 @@ frappe.ui.form.on(
     formName,  // Name of the form
     {
         onload: function (frm) {
-            if (frm.doc[keepTemplatesCheckbox] !== 1) {  // Only if the user did not check the box
+            if (frm.doc[keepTemplatesCheckbox] !== 1 && frm.doc.docstatus == 0) {  // Only if the user did not check the box
                 frm.events.renderTemplate(frm);  // Directly render the template on page load
             }
         },
