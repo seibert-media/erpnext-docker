@@ -124,7 +124,7 @@ class PixelletterComposer{
         var fields = this.dialog.fields_dict;
         var description = $(fields.description.wrapper);
 
-        $("<h4 class='pixelletter-description'>Inovice automatically attached, please attach additional pdf only!</h4>").appendTo(description.empty())
+        $("<h4 class='pixelletter-description'>Invoice automatically attached, please attach additional pdf only!</h4>").appendTo(description.empty())
     }
     render_attach(){
         var fields = this.dialog.fields_dict;
@@ -172,7 +172,7 @@ frappe.ui.form.on(
     formName,  // Name of the form
     {
         onload: function (frm) {
-            if (frm.doc[keepTemplatesCheckbox] !== 1) {  // Only if the user did not check the box
+            if (frm.doc[keepTemplatesCheckbox] !== 1 && frm.doc.docstatus == 0) {  // Only if the user did not check the box
                 frm.events.renderTemplate(frm);  // Directly render the template on page load
             }
         },
