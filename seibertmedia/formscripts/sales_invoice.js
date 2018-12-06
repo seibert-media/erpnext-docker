@@ -167,17 +167,21 @@ const formName = 'Sales Invoice';
 const keepTemplatesCheckbox = 'keep_custom_templates';
 const renderTemplatesButton = 'render_templates';
 const fieldNameTemplateLanguage = 'template_language';
+const introText = 'introtext';
+const outroText = 'outrotext';
 
 frappe.ui.form.on(
     formName,  // Name of the form
     {
         onload: function (frm) {
-            if (frm.doc[keepTemplatesCheckbox] !== 1 && frm.doc.docstatus == 0) {  // Only if the user did not check the box
+            toggleReadOnly(frm);
+            if (frm.doc[keepTemplatesCheckbox] === 1 && frm.doc.docstatus === 0) {  // Only if the user did check the box
                 frm.events.renderTemplate(frm);  // Directly render the template on page load
             }
         },
         after_save: function (frm) {
-            if (frm.doc[keepTemplatesCheckbox] !== 1) {  // Only if the user did not check the box
+            toggleReadOnly(frm);
+            if (frm.doc[keepTemplatesCheckbox] === 1) {  // Only if the user did check the box
                 frm.events.renderTemplate(frm);  // Render the template after saving the form
             }
         },
@@ -262,6 +266,29 @@ frappe.ui.form.on(
     }
 );
 
+/**
+ * Changes fields to read only if keepTemplatesCheckbox is checked
+ * @param frm
+ */
+function toggleReadOnly(frm) {
+    let toggled = frm.doc[keepTemplatesCheckbox] !== 1;
+    frm.toggle_enable(outroText, toggled);
+    frm.toggle_enable(introText, toggled);
+}
+
+/**
+ * Sets read only if keepTemplatesCheckbox is changed and re-renders the template if needed
+ */
+frappe.ui.form.on(
+    formName,
+    keepTemplatesCheckbox,
+    function (frm) {
+        toggleReadOnly(frm);
+        if (frm.doc[keepTemplatesCheckbox] === 1) {
+            frm.events.renderTemplate(frm);
+        }
+    }
+);
 
 /**
  * TODO: Please complete the info what this does!
