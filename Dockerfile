@@ -5,7 +5,6 @@ LABEL maintainer="//SEIBERT/MEDIA GmbH  <docker@seibert-media.net>"
 ARG FRAPPE_VERSION=v10.1.64
 ARG ERPNEXT_VERSION=v10.1.72
 ARG BENCH_VERSION=master
-ARG SEIBERTMEDIA_APP_VERSION=1.3.6
 
 RUN set -x \
 	&& DEBIAN_FRONTEND=noninteractive apt-get update --quiet \
@@ -97,6 +96,8 @@ RUN mkdir -p /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY nginx.conf /etc/nginx/sites-available/default
 COPY bench-repo .
+
+COPY sh/ /sh/
 
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

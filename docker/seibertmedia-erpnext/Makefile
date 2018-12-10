@@ -1,7 +1,7 @@
 PATH         := /opt/docker_utils/bin:/opt/atlassian_utils/bin:$(PATH)
 SHELL        := env PATH=$(PATH) /bin/bash
 REGISTRY     ?= docker.seibert-media.net
-IMAGE        ?= seibertmedia/erpnext-base
+IMAGE        ?= seibertmedia/erpnext
 VERSION      ?= latest
 VERSIONS     = $(VERSION)
 VERSIONS     += $(shell git fetch --tags; git tag -l --points-at HEAD)
