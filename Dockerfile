@@ -85,7 +85,6 @@ RUN /home/frappe/bench-repo/env/bin/pip install html5lib uwsgi
 
 WORKDIR /home/frappe/bench-repo
 RUN bench get-app erpnext https://github.com/frappe/erpnext.git --branch ${ERPNEXT_VERSION}
-RUN bench get-app seibertmedia ssh://git@bitbucket.org:22/seibertmedia-alle/seibertmedia-app.git --branch ${SEIBERTMEDIA_APP_VERSION}
 
 # TODO: remove banana app
 RUN bench get-app banana https://github.com/bborbe/erpnext-banana-app.git --branch master
