@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-for file in /dir/*
+for file in /sh/*
 do
-  cmd [option] "$file"
+  bash "$file"
 done
 
 exec "$@"
