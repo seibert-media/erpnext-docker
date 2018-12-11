@@ -5,7 +5,6 @@ LABEL maintainer="//SEIBERT/MEDIA GmbH  <docker@seibert-media.net>"
 ARG FRAPPE_VERSION=v10.1.64
 ARG ERPNEXT_VERSION=v10.1.72
 ARG BENCH_VERSION=master
-ARG SEIBERTMEDIA_APP_VERSION=1.3.6
 
 RUN set -x \
 	&& DEBIAN_FRONTEND=noninteractive apt-get update --quiet \
@@ -76,8 +75,6 @@ RUN npm install -g yarn
 WORKDIR /home/frappe
 RUN git clone -b ${BENCH_VERSION} https://github.com/frappe/bench.git bench-repo
 RUN pip install -e bench-repo
-COPY ssh /home/frappe/.ssh
-RUN chmod 400 /home/frappe/.ssh/*
 RUN chown -R frappe:frappe /home/frappe
 
 USER frappe
@@ -86,17 +83,14 @@ RUN /home/frappe/bench-repo/env/bin/pip install html5lib uwsgi
 
 WORKDIR /home/frappe/bench-repo
 RUN bench get-app erpnext https://github.com/frappe/erpnext.git --branch ${ERPNEXT_VERSION}
-RUN bench get-app seibertmedia ssh://git@bitbucket.org:22/seibertmedia-alle/seibertmedia-app.git --branch ${SEIBERTMEDIA_APP_VERSION}
-
-# TODO: remove banana app
-RUN bench get-app banana https://github.com/bborbe/erpnext-banana-app.git --branch master
 
 USER root
-RUN rm -rf /home/frappe/.ssh
 RUN mkdir -p /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY nginx.conf /etc/nginx/sites-available/default
 COPY bench-repo .
+
+COPY entrypoints /entrypoints/
 
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

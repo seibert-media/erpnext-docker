@@ -1,7 +1,7 @@
-PATH         := /opt/docker_utils/bin:/opt/atlassian_utils/bin:$(PATH)
+PATH         := /opt/docker_utils/bin:$(PATH)
 SHELL        := env PATH=$(PATH) /bin/bash
 REGISTRY     ?= docker.seibert-media.net
-IMAGE        ?= seibertmedia/erpnext
+IMAGE        ?= seibertmedia/erpnext-base
 VERSION      ?= latest
 VERSIONS     = $(VERSION)
 VERSIONS     += $(shell git fetch --tags; git tag -l --points-at HEAD)
@@ -57,11 +57,3 @@ logs:
 run:
 	docker-compose up -d
 	docker-compose logs -f --tail=10 
-
-dev:
-	@if [ ! -d "./apps/seibertmedia" ]; then \
-		echo "please checkout seibertmedia app to apps/seibertmedia"; \
-		exit 1; \
-	fi
-	docker-compose -f docker-compose-dev.yml up -d
-	docker-compose -f docker-compose-dev.yml logs -f --tail=10 
