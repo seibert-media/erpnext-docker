@@ -179,7 +179,6 @@ frappe.ui.form.on(
                 frm.events.renderTemplate(frm);  // Directly render the template on page load
             }
         },
-        after_save: function (frm) {},
         /**
          * Renders the intro and outro templates
          *
