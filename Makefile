@@ -57,11 +57,4 @@ logs:
 run:
 	docker-compose up -d
 	docker-compose logs -f --tail=10 
-
-dev:
-	@if [ ! -d "./apps/seibertmedia" ]; then \
-		echo "please checkout seibertmedia app to apps/seibertmedia"; \
-		exit 1; \
-	fi
-	docker-compose -f docker-compose-dev.yml up -d
-	docker-compose -f docker-compose-dev.yml logs -f --tail=10 
+§

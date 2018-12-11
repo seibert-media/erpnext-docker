@@ -8,6 +8,10 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 3.0.0
+
+- Remove custom apps from base image  
+
 ## 2.11.0
 
 - Updated Seibert-Media App to 1.3.6 fix BRO-1147 

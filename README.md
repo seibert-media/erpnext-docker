@@ -1,6 +1,6 @@
-# ERPNext Docker Image
+# ERPNext Base Docker Image
 
-All freaze ERPNext and all installed apps.
+This image can be used as base docker image for ERPNext. 
 
 ## Local
 
