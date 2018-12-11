@@ -75,9 +75,6 @@ RUN npm install -g yarn
 WORKDIR /home/frappe
 RUN git clone -b ${BENCH_VERSION} https://github.com/frappe/bench.git bench-repo
 RUN pip install -e bench-repo
-COPY ssh /home/frappe/.ssh
-RUN chmod 400 /home/frappe/.ssh/*
-RUN chown -R frappe:frappe /home/frappe
 
 USER frappe
 RUN bench init /home/frappe/bench-repo --ignore-exist --skip-redis-config-generation --frappe-branch ${FRAPPE_VERSION}
@@ -87,7 +84,6 @@ WORKDIR /home/frappe/bench-repo
 RUN bench get-app erpnext https://github.com/frappe/erpnext.git --branch ${ERPNEXT_VERSION}
 
 USER root
-RUN rm -rf /home/frappe/.ssh
 RUN mkdir -p /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY nginx.conf /etc/nginx/sites-available/default
