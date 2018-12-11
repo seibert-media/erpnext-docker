@@ -1,8 +1,0 @@
-web: bench serve --port 8000
-#web: /home/frappe/bench-repo/env/bin/gunicorn -b :8000 -w 2 -t 6000 frappe.app:application --preload  --chdir /home/frappe/bench-repo/sites
-
-socketio: /usr/bin/node apps/frappe/socketio.js
-schedule: bench schedule
-worker_short: bench worker --queue short
-worker_long: bench worker --queue long
-worker_default: bench worker --queue default

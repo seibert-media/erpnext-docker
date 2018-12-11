@@ -1,6 +1,0 @@
-{
-	"developer_mode": "{{DEVELOPER_MODE}}",
-	"encryption_key": "{{ENCRYPTION_KEY}}",
-	"db_name": "{{DB_NAME}}",
-	"db_password": "{{DB_PASSWORD}}"
-}
