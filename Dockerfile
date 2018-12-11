@@ -75,6 +75,7 @@ RUN npm install -g yarn
 WORKDIR /home/frappe
 RUN git clone -b ${BENCH_VERSION} https://github.com/frappe/bench.git bench-repo
 RUN pip install -e bench-repo
+RUN chown -R frappe:frappe /home/frappe
 
 USER frappe
 RUN bench init /home/frappe/bench-repo --ignore-exist --skip-redis-config-generation --frappe-branch ${FRAPPE_VERSION}
