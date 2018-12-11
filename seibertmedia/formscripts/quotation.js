@@ -22,12 +22,7 @@ frappe.ui.form.on(
                 frm.events.renderTemplate(frm);  // Directly render the template on page load
             }
         },
-        after_save: function (frm) {
-            toggleReadOnly(frm);
-            if (frm.doc[keepTemplatesCheckbox] === 1) {  // Only if the user did check the box
-                frm.events.renderTemplate(frm);  // Render the template after saving the form
-            }
-        },
+        after_save: function (frm) {},
         /**
          * Renders the intro and outro templates
          *
