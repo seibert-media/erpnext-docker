@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-for file in /sh/*
+for file in /entrypoints/*
 do
   bash "$file"
 done

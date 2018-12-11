@@ -86,9 +86,6 @@ RUN /home/frappe/bench-repo/env/bin/pip install html5lib uwsgi
 WORKDIR /home/frappe/bench-repo
 RUN bench get-app erpnext https://github.com/frappe/erpnext.git --branch ${ERPNEXT_VERSION}
 
-# TODO: remove banana app
-RUN bench get-app banana https://github.com/bborbe/erpnext-banana-app.git --branch master
-
 USER root
 RUN rm -rf /home/frappe/.ssh
 RUN mkdir -p /var/log/supervisor
@@ -96,7 +93,7 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY nginx.conf /etc/nginx/sites-available/default
 COPY bench-repo .
 
-COPY sh/ /sh/
+COPY entrypoints /entrypoints/
 
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
