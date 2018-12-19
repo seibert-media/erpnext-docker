@@ -7,7 +7,7 @@
  */
 
 const formName = 'Quotation';
-const keepTemplatesCheckbox = 'keep_custom_templates';
+const keepTemplatesCheckbox = 'keep_default_templates';
 const renderTemplatesButton = 'render_templates';
 const fieldNameTemplateLanguage = 'template_language';
 const introText = 'introtext';
@@ -42,8 +42,8 @@ frappe.ui.form.on(
                 },
                 callback: function (res) {
                     if (!res.exc) {
-                        frm.set_value('introtext', res.message.html);
-                        frm.events.updateEditor(frm);
+                        frm.set_value(introText, res.message.html);
+                        frm.events.updateEditor(frm, introText);
                     } else {
                         console.error("Could not set the value for 'introtext'");
                     }
@@ -61,8 +61,8 @@ frappe.ui.form.on(
                 },
                 callback: function (res) {
                     if (!res.exc) {
-                        frm.set_value('outrotext', res.message.html);
-                        frm.events.updateEditor(frm);
+                        frm.set_value(outroText, res.message.html);
+                        frm.events.updateEditor(frm, outroText);
                     } else {
                         console.error("Could not set the value for 'outrotext'");
                     }
@@ -73,7 +73,8 @@ frappe.ui.form.on(
          * Updates the DOM so that the text inside of the editor is correct again.
          */
         updateEditor: function (frm, editorName) {
-            $('body').find(`[data-fieldname="${editorName}"]`).find(classNameOfTextEditors).html(frm.doc[editorName])
+            $('body').find(`[data-fieldname="${editorName}"]`).find(classNameOfTextEditors).html(frm.doc[editorName]);
+            console.log(`Re-rendered editor '${editorName}'.`);
         },
         /**
          * Retrieves the currently set language of the print preview
