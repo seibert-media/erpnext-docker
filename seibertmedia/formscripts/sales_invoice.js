@@ -169,6 +169,7 @@ const renderTemplatesButton = 'render_templates';
 const fieldNameTemplateLanguage = 'template_language';
 const introText = 'introtext';
 const outroText = 'outrotext';
+const classNameOfTextEditors = '.note-editable';
 
 frappe.ui.form.on(
     formName,  // Name of the form
@@ -227,7 +228,7 @@ frappe.ui.form.on(
          * Updates the DOM so that the text inside of the editor is correct again.
          */
         updateEditor: function (frm, editorName) {
-            $('body').find(`[data-fieldname="${editorName}"]`).find('.note-editable').html(frm.doc[editorName])
+            $('body').find(`[data-fieldname="${editorName}"]`).find(classNameOfTextEditors).html(frm.doc[editorName])
         },
         /**
          * Retrieves the currently set language of the print preview
