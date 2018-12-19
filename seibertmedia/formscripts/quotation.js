@@ -42,6 +42,9 @@ frappe.ui.form.on(
                 callback: function (res) {
                     if (!res.exc) {
                         frm.set_value('introtext', res.message.html);
+                        frm.events.updateEditor(frm);
+                    } else {
+                        console.error("Could not set the value for 'introtext'");
                     }
                 }
             });
@@ -58,9 +61,18 @@ frappe.ui.form.on(
                 callback: function (res) {
                     if (!res.exc) {
                         frm.set_value('outrotext', res.message.html);
+                        frm.events.updateEditor(frm);
+                    } else {
+                        console.error("Could not set the value for 'outrotext'");
                     }
                 }
             });
+        },
+        /**
+         * Updates the DOM so that the text inside of the editor is correct again.
+         */
+        updateEditor: function (frm, editorName) {
+            $('body').find(`[data-fieldname="${editorName}"]`).find('.note-editable').html(frm.doc[editorName])
         },
         /**
          * Retrieves the currently set language of the print preview
