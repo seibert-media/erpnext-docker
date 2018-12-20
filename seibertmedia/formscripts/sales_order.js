@@ -7,21 +7,20 @@
  */
 
 const formName = 'Sales Order';
-const keepTemplatesCheckbox = 'keep_custom_templates';
+const keepTemplatesCheckbox = 'keep_default_templates';
 const renderTemplatesButton = 'render_templates';
 const fieldNameTemplateLanguage = 'template_language';
+const introText = 'introtext';
+const outroText = 'outrotext';
+const classNameOfTextEditors = '.note-editable';
 
 frappe.ui.form.on(
     formName,  // Name of the form
     {
         onload: function (frm) {
-            if (frm.doc[keepTemplatesCheckbox] !== 1 && frm.doc.docstatus == 0) {  // Only if the user did not check the box
+            toggleReadOnly(frm);
+            if (frm.doc[keepTemplatesCheckbox] === 1 && frm.doc.docstatus === 0) {  // Only if the user did check the box
                 frm.events.renderTemplate(frm);  // Directly render the template on page load
-            }
-        },
-        after_save: function (frm) {
-            if (frm.doc[keepTemplatesCheckbox] !== 1) {  // Only if the user did not check the box
-                frm.events.renderTemplate(frm);  // Render the template after saving the form
             }
         },
         /**
@@ -43,7 +42,10 @@ frappe.ui.form.on(
                 },
                 callback: function (res) {
                     if (!res.exc) {
-                        frm.set_value('introtext', res.message.html);
+                        frm.set_value(introText, res.message.html);
+                        frm.events.updateEditor(frm, introText);
+                    } else {
+                        console.error("Could not set the value for 'introtext'");
                     }
                 }
             });
@@ -59,10 +61,20 @@ frappe.ui.form.on(
                 },
                 callback: function (res) {
                     if (!res.exc) {
-                        frm.set_value('outrotext', res.message.html);
+                        frm.set_value(outroText, res.message.html);
+                        frm.events.updateEditor(frm, outroText);
+                    } else {
+                        console.error("Could not set the value for 'outrotext'");
                     }
                 }
             });
+        },
+        /**
+         * Updates the DOM so that the text inside of the editor is correct again.
+         */
+        updateEditor: function (frm, editorName) {
+            $('body').find(`[data-fieldname="${editorName}"]`).find(classNameOfTextEditors).html(frm.doc[editorName]);
+            console.log(`Re-rendered editor '${editorName}'.`);
         },
         /**
          * Retrieves the currently set language of the print preview
@@ -90,6 +102,30 @@ frappe.ui.form.on(
     renderTemplatesButton,  // Name of the button
     function (frm) {
         frm.events.renderTemplate(frm);
+    }
+);
+
+/**
+ * Changes fields to read only if keepTemplatesCheckbox is checked
+ * @param frm
+ */
+function toggleReadOnly(frm) {
+    let toggled = frm.doc[keepTemplatesCheckbox] !== 1;
+    frm.toggle_enable(outroText, toggled);
+    frm.toggle_enable(introText, toggled);
+}
+
+/**
+ * Sets read only if keepTemplatesCheckbox is changed and re-renders the template if needed
+ */
+frappe.ui.form.on(
+    formName,
+    keepTemplatesCheckbox,
+    function (frm) {
+        toggleReadOnly(frm);
+        if (frm.doc[keepTemplatesCheckbox] === 1) {
+            frm.events.renderTemplate(frm);
+        }
     }
 );
 
