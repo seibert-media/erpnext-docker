@@ -11,7 +11,7 @@ frappe.ui.form.on("Opportunity", "refresh", function (frm) {
     if (frm.is_dirty() !== 1) {
         frm.page.add_menu_item("Angebot generieren", function () {
             frappe.call({
-                method: "seibertmedia.seibertmedia.doctype.quotetask.quotetask.create_quote_task",
+                method: "seibertmedia.seibertmedia.doctype.quote_task.quote_task.create_quote_task",
                 args: {
                     opportunity_id: frm.doc.name,
                     technical_contact: frm.doc.contact_person,

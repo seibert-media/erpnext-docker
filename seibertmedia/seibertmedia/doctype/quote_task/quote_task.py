@@ -36,7 +36,7 @@ def create_quote_task(opportunity_id=None, technical_contact=None, customer=None
         frappe.throw('Missing Contact Email!')
 
     new_quote = frappe.new_doc(QUOTE_TASK)
-    new_quote.opportunityid = opportunity_id
+    new_quote.opportunity_id = opportunity_id
     new_quote.technical_contact = technical_contact
     new_quote.state = REQUESTED
     new_quote.company = customer
@@ -49,4 +49,4 @@ def create_quote_task(opportunity_id=None, technical_contact=None, customer=None
 
     new_quote.insert(ignore_permissions=True)
 
-    return str(opportunity_id), str(technical_contact), items
+    return str(opportunity_id)
