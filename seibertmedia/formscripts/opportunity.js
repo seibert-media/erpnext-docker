@@ -14,7 +14,7 @@ frappe.ui.form.on("Opportunity", "refresh", function (frm) {
                 method: "seibertmedia.seibertmedia.doctype.quote_task.quote_task.create_quote_task",
                 args: {
                     opportunity_id: frm.doc.name,
-                    technical_contact: frm.doc.contact_person,
+                    technical_contact: frm.doc.contact_display,
                     items: frm.doc.items,
                     customer: frm.doc.customer,
                     contact_email: frm.doc.contact_email,
