@@ -14,10 +14,10 @@ frappe.ui.form.on("Opportunity", "refresh", function (frm) {
                 method: "seibertmedia.seibertmedia.doctype.quote_task.quote_task.create_quote_task",
                 args: {
                     opportunity_id: frm.doc.name,
-                    technical_contact: frm.doc.contact_display,
+                    technical_contact: frm.doc.contact_person,
                     items: frm.doc.items,
-                    customer: frm.doc.customer,
-                    contact_email: frm.doc.contact_email,
+                    customer_name: frm.doc.customer,
+                    customer_address: frm.doc.customer_address,
                 },
                 callback: function (resp) {
                     frappe.msgprint('Die Angebotsgenerierung wurde erfolgreich angestoßen!', 'Angebotsgenerierung');
