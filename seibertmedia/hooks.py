@@ -15,5 +15,6 @@ doctype_js = {
     'Quotation': 'formscripts/quotation.js',
     'Sales Invoice': 'formscripts/sales_invoice.js',
     'Sales Order': 'formscripts/sales_order.js',
+    'Opportunity': 'formscripts/opportunity.js',
 }
 

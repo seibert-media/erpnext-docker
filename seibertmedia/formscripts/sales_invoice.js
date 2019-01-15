@@ -7,7 +7,7 @@ class PixelletterComposer{
     make() {
         var me = this;
         this.dialog = new frappe.ui.Dialog({
-            title: "Send via Pixelletter", fields: [
+            title: "Send as Letter", fields: [
                 {
                     label: __("Inovice automatically attached, please attach additional pdf only!"), fieldtype: "HTML",
                     fieldname: "description"
@@ -16,7 +16,7 @@ class PixelletterComposer{
                     label: __("Select Attachments"), fieldtype: "HTML",
                     fieldname: "select_attachments"
                 },
-            ], primary_action_label: "Send via Pixelletter", primary_action: function() {
+            ], primary_action_label: "Send as Letter", primary_action: function() {
                 if (cur_frm && !frappe.model.can_email(me.doc.doctype, cur_frm)) {
                     frappe.msgprint(__("You are not allowed to send emails related to this document"));
                     return;
@@ -41,7 +41,7 @@ class PixelletterComposer{
                     },
                     callback: function (resp) {
                         me.dialog.hide();
-                        frappe.msgprint("<p>Your Pixelletter was enqueued and will be sent within the next 60min.</p><p>Pixelletter ID: <a href=\"#Form/Pixelletter/" + resp.message.name + "\">" + resp.message.name + "</a></p>", "Pixelletter sent");
+                        frappe.msgprint("<p>Your Letter was enqueued and will be sent within the next 60min.</p><p>Pixelletter ID: <a href=\"#Form/Pixelletter/" + resp.message.name + "\">" + resp.message.name + "</a></p>", "Letter sent");
                     }
                 });
             }
