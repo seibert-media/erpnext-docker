@@ -22,7 +22,7 @@ class QuoteTask(Document):
 
 
 @frappe.whitelist()
-def create_quote_task(opportunity_id=None, technical_contact=None, customer=None, customer_address=None, items=None):
+def create_quote_task(opportunity_id=None, technical_contact=None, customer_name=None, customer_address=None, items=None):
 
     if not opportunity_id:
         frappe.throw('Missing Opportunity ID')
@@ -33,7 +33,7 @@ def create_quote_task(opportunity_id=None, technical_contact=None, customer=None
     if not items:
         frappe.throw('Missing Items!')
 
-    if not customer:
+    if not customer_name:
         frappe.throw('Missing Customer!')
 
     if not customer_address:
@@ -41,7 +41,7 @@ def create_quote_task(opportunity_id=None, technical_contact=None, customer=None
 
     # Get info from other doctypes
     contact = frappe.get_doc(CONTACT, technical_contact)
-    customer = frappe.get_doc(CUSTOMER, customer)
+    customer = frappe.get_doc(CUSTOMER, customer_name)
     address = frappe.get_doc(ADDRESS, customer_address)
     country_code = frappe.db.get_value(COUNTRY, address.country, 'code').upper()
 
@@ -57,7 +57,7 @@ def create_quote_task(opportunity_id=None, technical_contact=None, customer=None
     new_quote.phone = contact.phone
 
     # Set company and address info
-    new_quote.company = customer
+    new_quote.company = customer_name
     new_quote.address_line_1 = address.address_line1
     new_quote.address_line_2 = address.address_line2
     new_quote.post_code = address.pincode
