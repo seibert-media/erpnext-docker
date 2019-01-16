@@ -15,6 +15,10 @@ CONTACT = 'Contact'
 CUSTOMER = 'Customer'
 ADDRESS = 'Address'
 COUNTRY = 'Country'
+ITEM = 'Item'
+
+ORDERABLE_ITEM_ID = 'orderableitemid'
+MAINTENANCE_MONTHS = 'maintenancemonths'
 
 
 class QuoteTask(Document):
@@ -69,6 +73,8 @@ def create_quote_task(opportunity_id=None, technical_contact=None, customer_name
     quote_items = json.loads(items)
 
     for item in quote_items:
+        item[ORDERABLE_ITEM_ID] = frappe.db.get_value(ITEM, {'item_code': item['item_code']}, ORDERABLE_ITEM_ID)
+        item[MAINTENANCE_MONTHS] = frappe.db.get_value(ITEM, {'item_code': item['item_code']}, MAINTENANCE_MONTHS)
         new_quote.append(ITEM_TABLE, item)
 
     new_quote.insert(ignore_permissions=True)
