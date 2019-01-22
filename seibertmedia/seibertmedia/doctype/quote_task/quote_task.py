@@ -54,6 +54,18 @@ def create_quote_task(opportunity_id=None, technical_contact=None, customer_name
     new_quote.opportunity_id = opportunity_id
     new_quote.state = REQUESTED
 
+    if not contact.first_name:
+        frappe.throw('Der Contact hat keinen First Name! Bitte Nachtragen!')
+
+    if not contact.last_name:
+        frappe.throw('Der Contact hat keinen Last Name! Bitte Nachtragen!')
+
+    if not contact.email_id:
+        frappe.throw('Das Feld "Email" des Contacts ist leer! Bitte Nachtragen!')
+
+    if not contact.phone:
+        frappe.throw('Der Contact hat keine Phone Number! Bitte Nachtragen!')
+
     # Set technical contact info
     new_quote.first_name = contact.first_name
     new_quote.last_name = contact.last_name
