@@ -49,6 +49,18 @@ def create_quote_task(opportunity_id=None, technical_contact=None, customer_name
     address = frappe.get_doc(ADDRESS, customer_address)
     country_code = frappe.db.get_value(COUNTRY, address.country, 'code').upper()
 
+    if not contact.first_name:
+        frappe.throw('Der Contact hat keinen First Name! Bitte Nachtragen!')
+
+    if not contact.last_name:
+        frappe.throw('Der Contact hat keinen Last Name! Bitte Nachtragen!')
+
+    if not contact.email_id:
+        frappe.throw('Das Feld "Email" des Contacts ist leer! Bitte Nachtragen!')
+
+    if not contact.phone:
+        frappe.throw('Der Contact hat keine Phone Number! Bitte Nachtragen!')
+
     # Create a new Quote Task and set general info
     new_quote = frappe.new_doc(QUOTE_TASK)
     new_quote.opportunity_id = opportunity_id
