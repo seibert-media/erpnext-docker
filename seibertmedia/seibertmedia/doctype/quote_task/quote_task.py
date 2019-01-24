@@ -85,8 +85,14 @@ def create_quote_task(opportunity_id=None, technical_contact=None, customer_name
     quote_items = json.loads(items)
 
     for item in quote_items:
-        item[ORDERABLE_ITEM_ID] = frappe.db.get_value(ITEM, {'item_code': item['item_code']}, ORDERABLE_ITEM_ID)
-        item[MAINTENANCE_MONTHS] = frappe.db.get_value(ITEM, {'item_code': item['item_code']}, MAINTENANCE_MONTHS)
+        orderable_item_id = frappe.db.get_value(ITEM, {'item_code': item['item_code']}, ORDERABLE_ITEM_ID)
+        maintenance_months = frappe.db.get_value(ITEM, {'item_code': item['item_code']}, MAINTENANCE_MONTHS)
+
+        if orderable_item_id == "":
+            frappe.throw("Das Item '{}' kann nicht über Atlassian zur Quote hinzugefügt werden! Bitte aus Opportunity entfernen!".format(item['item_name']))
+
+        item[ORDERABLE_ITEM_ID] = orderable_item_id
+        item[MAINTENANCE_MONTHS] = maintenance_months
         new_quote.append(ITEM_TABLE, item)
 
     new_quote.insert(ignore_permissions=True)
