@@ -20,7 +20,7 @@ frappe.ui.form.on("Opportunity", "refresh", function (frm) {
                     customer_address: frm.doc.customer_address,
                 },
                 callback: function (resp) {
-                    frappe.msgprint('Die Angebotsgenerierung wurde erfolgreich angestoßen!', 'Angebotsgenerierung');
+                    frappe.msgprint('Die AT-Generierung wurde erfolgreich angestoßen!', 'AT-Generierung');
                 }
             });
         });
