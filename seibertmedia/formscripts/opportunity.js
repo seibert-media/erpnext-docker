@@ -9,7 +9,7 @@ frappe.provide("seibertmedia.opportunity");
 
 frappe.ui.form.on("Opportunity", "refresh", function (frm) {
     if (frm.is_dirty() !== 1) {
-        frm.page.add_menu_item("Angebot generieren", function () {
+        frm.page.add_menu_item("AT-Quote generieren", function () {
             frappe.call({
                 method: "seibertmedia.seibertmedia.doctype.quote_task.quote_task.create_quote_task",
                 args: {
@@ -20,7 +20,7 @@ frappe.ui.form.on("Opportunity", "refresh", function (frm) {
                     customer_address: frm.doc.customer_address,
                 },
                 callback: function (resp) {
-                    frappe.msgprint('Die Angebotsgenerierung wurde erfolgreich angestoßen!', 'Angebotsgenerierung');
+                    frappe.msgprint('Die AT-Generierung wurde erfolgreich angestoßen!', 'AT-Generierung');
                 }
             });
         });

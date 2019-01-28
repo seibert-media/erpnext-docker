@@ -84,6 +84,9 @@ def create_quote_task(opportunity_id=None, technical_contact=None, customer_name
 
     quote_items = json.loads(items)
 
+    if len(quote_items) == 0:
+        frappe.throw('Bitte Items zur Quote hinzufügen!')
+
     for item in quote_items:
         orderable_item_id = frappe.db.get_value(ITEM, {'item_code': item['item_code']}, ORDERABLE_ITEM_ID)
         maintenance_months = frappe.db.get_value(ITEM, {'item_code': item['item_code']}, MAINTENANCE_MONTHS)
