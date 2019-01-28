@@ -9,7 +9,7 @@ frappe.provide("seibertmedia.opportunity");
 
 frappe.ui.form.on("Opportunity", "refresh", function (frm) {
     if (frm.is_dirty() !== 1) {
-        frm.page.add_menu_item("Angebot generieren", function () {
+        frm.page.add_menu_item("AT-Quote generieren", function () {
             frappe.call({
                 method: "seibertmedia.seibertmedia.doctype.quote_task.quote_task.create_quote_task",
                 args: {
