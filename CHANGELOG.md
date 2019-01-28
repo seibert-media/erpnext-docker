@@ -8,6 +8,10 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 2.14.3
+
+- Updated Seibert-Media App to 1.3.11
+
 ## 2.14.2
 
 - Updated Seibert-Media App to 1.3.10
@@ -30,7 +34,7 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 
 ## 2.11.0
 
-- Updated Seibert-Media App to 1.3.6 fix BRO-1147 
+- Updated Seibert-Media App to 1.3.6 fix BRO-1147
 
 ## 2.10.0
 
@@ -56,7 +60,7 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 
 ## 2.5.1
 
-- Update frappe to v10.1.64 
+- Update frappe to v10.1.64
 - Update erpnext to v10.1.72
 - Set net.core.somaxconn for docker-compose
 
@@ -71,7 +75,7 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 
 ## 2.4.1
 
-- Update frappe to v10.1.59 
+- Update frappe to v10.1.59
 - Update erpnext to v10.1.69
 
 ## 2.4.0
@@ -105,12 +109,12 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 
 ## 1.1.0
 
-- add seibertmedia app 
+- add seibertmedia app
 - use tags for erpnext and frappe
 
 ## 1.0.1
 
-- change wkhtmltopdf to allow run without X 
+- change wkhtmltopdf to allow run without X
 
 ## 1.0.0
 
