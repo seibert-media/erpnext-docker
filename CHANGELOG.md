@@ -8,6 +8,10 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 1.3.11
+
+- Added new fields to Items
+
 ## 1.3.10
 
 - Add check for technical contact infos in quote generation process
@@ -61,7 +65,7 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 
 ## 1.1.0
 
-- Remove print button from Sales Invoice 
+- Remove print button from Sales Invoice
 
 ## 1.0.0
 
