@@ -2,7 +2,7 @@ FROM docker.seibert-media.net/seibertmedia/erpnext-base:3.0.0
 
 LABEL maintainer="//SEIBERT/MEDIA GmbH  <docker@seibert-media.net>"
 
-ARG SEIBERTMEDIA_APP_VERSION=1.3.10
+ARG SEIBERTMEDIA_APP_VERSION=1.3.11
 
 COPY ssh /home/frappe/.ssh
 RUN chmod 400 /home/frappe/.ssh/*
