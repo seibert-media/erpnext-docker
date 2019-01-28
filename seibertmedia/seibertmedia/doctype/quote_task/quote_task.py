@@ -17,8 +17,8 @@ ADDRESS = 'Address'
 COUNTRY = 'Country'
 ITEM = 'Item'
 
-ORDERABLE_ITEM_ID = 'orderableitemid'
-MAINTENANCE_MONTHS = 'maintenancemonths'
+ORDERABLE_ITEM_ID = 'orderable_item_id'
+MAINTENANCE_MONTHS = 'maintenance_months'
 
 
 class QuoteTask(Document):
