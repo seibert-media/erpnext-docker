@@ -7,6 +7,9 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MAJOR version when you make incompatible API changes,
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
+## 1.4.0
+
+- Added Licence and Licence Transaction DocType
 
 ## 1.3.11
 
