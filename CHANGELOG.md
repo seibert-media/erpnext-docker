@@ -8,6 +8,10 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 3.0.1
+
+- Remove redundant uninstall-app step, Refactor log
+
 ## 3.0.0
 
 - Remove custom apps from base image  
