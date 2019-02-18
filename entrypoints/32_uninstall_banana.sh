@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-echo "uninstall apps ..."
+echo "uninstall banana app"
 bench --site site1.local uninstall-app banana -y || true
