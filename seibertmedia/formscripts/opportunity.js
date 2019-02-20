@@ -18,6 +18,9 @@ frappe.ui.form.on("Opportunity", "refresh", function (frm) {
                     items: frm.doc.items,
                     customer_name: frm.doc.customer,
                     customer_address: frm.doc.customer_address,
+                    license_type: frm.doc.license_type,
+                    sen: frm.doc.sen,
+                    renewal_period: frm.doc.renewal_period,
                 },
                 callback: function (resp) {
                     frappe.msgprint('Die AT-Generierung wurde erfolgreich angestoßen!', 'AT-Generierung');

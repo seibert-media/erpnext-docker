@@ -17,6 +17,8 @@ ADDRESS = 'Address'
 COUNTRY = 'Country'
 ITEM = 'Item'
 
+LICENSE_TYPE_RENEWAL = "Renewal"
+
 ORDERABLE_ITEM_ID = 'orderable_item_id'
 MAINTENANCE_MONTHS = 'maintenance_months'
 
@@ -26,7 +28,7 @@ class QuoteTask(Document):
 
 
 @frappe.whitelist()
-def create_quote_task(opportunity_id=None, technical_contact=None, customer_name=None, customer_address=None, items=None):
+def create_quote_task(opportunity_id=None, technical_contact=None, customer_name=None, customer_address=None, items=None, license_type=None, sen=None, renewal_period=None):
 
     if not opportunity_id:
         frappe.throw('Missing Opportunity ID')
@@ -42,6 +44,12 @@ def create_quote_task(opportunity_id=None, technical_contact=None, customer_name
 
     if not customer_address:
         frappe.throw('Missing Customer Address!')
+
+    if license_type and license_type == LICENSE_TYPE_RENEWAL:
+        if not sen:
+            frappe.throw('Missing SEN for Renewal!')
+        if not renewal_period:
+            frappe.throw('Missing Renewal Period!')
 
     # Get info from other doctypes
     contact = frappe.get_doc(CONTACT, technical_contact)
@@ -81,6 +89,11 @@ def create_quote_task(opportunity_id=None, technical_contact=None, customer_name
     new_quote.country_state = address.state
     new_quote.country_code = country_code
     new_quote.tax_id = customer.tax_id
+
+    # Set license type specific info
+    new_quote.license_type = license_type
+    new_quote.sen = sen
+    new_quote.renewal_period = renewal_period
 
     quote_items = json.loads(items)
 
