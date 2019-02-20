@@ -92,11 +92,8 @@ def create_quote_task(opportunity_id=None, technical_contact=None, customer_name
 
     # Set license type specific info
     new_quote.license_type = license_type
-    if license_type == LICENSE_TYPE_RENEWAL:
-        if sen:
-            new_quote.sen = sen
-        if renewal_period:
-            new_quote.renewal_period = renewal_period
+    new_quote.sen = sen
+    new_quote.renewal_period = renewal_period
 
     quote_items = json.loads(items)
 
