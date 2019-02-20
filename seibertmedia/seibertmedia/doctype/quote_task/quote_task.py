@@ -97,7 +97,7 @@ def create_quote_task(opportunity_id=None, technical_contact=None, customer_name
 
     quote_items = json.loads(items)
 
-    if len(quote_items) == 0:
+    if len(quote_items) == 0 and license_type != LICENSE_TYPE_RENEWAL:
         frappe.throw('Bitte Items zur Quote hinzufügen!')
 
     for item in quote_items:
