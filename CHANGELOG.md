@@ -14,7 +14,7 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 
 ## 1.4.2
 
-- Add License Contact DocType, Change Licence Transaction DocType
+- Added License Contact DocType, Change Licence Transaction DocType
 
 ## 1.4.1
 
