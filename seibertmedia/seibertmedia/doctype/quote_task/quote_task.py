@@ -95,12 +95,8 @@ def create_quote_task(opportunity_id=None, technical_contact=None, customer_name
     if license_type == LICENSE_TYPE_RENEWAL:
         if sen:
             new_quote.sen = sen
-        else:
-            frappe.throw('SEN auswählen!')
         if renewal_period:
             new_quote.renewal_period = renewal_period
-        else:
-            frappe.throw('Renewal Period auswählen!')
 
     quote_items = json.loads(items)
 
