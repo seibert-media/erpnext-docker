@@ -8,6 +8,10 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 1.4.4
+
+- Added enduser options for license process, and validation of end user data
+
 ## 1.4.3
 
 - Changed field type of organisation in Licence DocType to Link
