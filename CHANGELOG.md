@@ -8,6 +8,10 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 2.14.6
+
+- Updated Seibert-Media App to 1.4.4
+
 ## 2.14.5
 
 - Updated ERPNext base image
