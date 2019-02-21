@@ -11,9 +11,6 @@ RUN chown -R frappe:frappe /home/frappe/.ssh/*
 USER frappe
 WORKDIR /home/frappe/bench-repo
 RUN bench get-app seibertmedia ssh://git@bitbucket.org:22/seibertmedia-alle/seibertmedia-app.git --branch ${SEIBERTMEDIA_APP_VERSION}
-# TODO: remove banana app
-RUN bench get-app banana https://github.com/bborbe/erpnext-banana-app.git --branch master
-
 USER root
 RUN rm -rf /home/frappe/.ssh
 COPY entrypoints /entrypoints/
