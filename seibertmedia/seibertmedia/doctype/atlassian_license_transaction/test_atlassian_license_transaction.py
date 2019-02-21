@@ -6,5 +6,5 @@ from __future__ import unicode_literals
 import frappe
 import unittest
 
-class TestLicenceTransaction(unittest.TestCase):
+class TestAtlassianLicenseTransaction(unittest.TestCase):
 	pass

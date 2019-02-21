@@ -2,15 +2,15 @@
 // rename this file from _test_[name] to test_[name] to activate
 // and remove above this line
 
-QUnit.test("test: Licence Transaction", function (assert) {
+QUnit.test("test: Atlassian License Transaction", function (assert) {
 	let done = assert.async();
 
 	// number of asserts
 	assert.expect(1);
 
 	frappe.run_serially([
-		// insert a new Licence Transaction
-		() => frappe.tests.make('Licence Transaction', [
+		// insert a new License Transaction
+		() => frappe.tests.make('Atlassian License Transaction', [
 			// values to be set
 			{key: 'value'}
 		]),

@@ -8,25 +8,29 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 1.5.0
+
+- Rename Doctypes
+
 ## 1.4.4
 
 - Added enduser options for license process, and validation of end user data
 
 ## 1.4.3
 
-- Changed field type of organisation in Licence DocType to Link
+- Changed field type of organisation in License DocType to Link
 
 ## 1.4.2
 
-- Added License Contact DocType, Change Licence Transaction DocType
+- Added License Contact DocType, Change License Transaction DocType
 
 ## 1.4.1
 
-- Added additional fields to Licence and Licence Transaction DocType
+- Added additional fields to License and License Transaction DocType
 
 ## 1.4.0
 
-- Added Licence and Licence Transaction DocType
+- Added License and License Transaction DocType
 
 ## 1.3.11
 
