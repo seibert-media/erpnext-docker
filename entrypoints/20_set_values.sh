@@ -20,7 +20,7 @@ sed -i "s/{{ENCRYPTION_KEY}}/${ENCRYPTION_KEY}/" sites/site1.local/site_config.j
 
 DEVELOPER_MODE=${DEVELOPER_MODE:-"0"}
 echo "set DEVELOPER_MODE to ${DEVELOPER_MODE}"
-sed -i "s/{{DEVELOPER_MODE}}/${DEVELOPER_MODE}/" sites/common_site_config.json
+sed -i "s/{{DEVELOPER_MODE}}/${DEVELOPER_MODE}/" sites/site1.local/site_config.json
 
 WORKER=${WORKER:-"4"}
 echo "set Worker to ${WORKER}"
