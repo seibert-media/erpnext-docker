@@ -8,6 +8,10 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 2.16.0
+
+- Include Seibert-Media App
+
 ## 2.15.2
 
 - Updated Seibert-Media App to 1.5.2
