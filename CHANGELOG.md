@@ -10,6 +10,7 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 
 ## 2.16.0
 
+- Update Erpnext-base Image to 3.1.0 
 - Include Seibert-Media App
 
 ## 2.15.2
