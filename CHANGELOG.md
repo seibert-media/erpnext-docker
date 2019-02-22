@@ -8,6 +8,11 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 3.1.0
+
+- Update Frappe to v10.1.71
+- Update Erpnext to v10.1.81
+
 ## 3.0.2
 
 - Fix developer mode
