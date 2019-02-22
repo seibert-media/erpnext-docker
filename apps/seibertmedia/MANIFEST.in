@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include seibertmedia *.css
+recursive-include seibertmedia *.csv
+recursive-include seibertmedia *.html
+recursive-include seibertmedia *.ico
+recursive-include seibertmedia *.js
+recursive-include seibertmedia *.json
+recursive-include seibertmedia *.md
+recursive-include seibertmedia *.png
+recursive-include seibertmedia *.py
+recursive-include seibertmedia *.svg
+recursive-include seibertmedia *.txt
+recursive-exclude seibertmedia *.pyc
