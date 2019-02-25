@@ -26,7 +26,7 @@ clean:
 
 upload:
 	@for i in $(VERSIONS); do \
-		exists=`docker_remote_tag_exists \
+		exists=`docker-remote-tag-exists \
 			-registry=${REGISTRY} \
 			-credentialsfromfile \
 			-repository="${IMAGE}" \
