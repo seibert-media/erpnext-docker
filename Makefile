@@ -28,7 +28,6 @@ upload:
 	@for i in $(VERSIONS); do \
 		exists=`docker-remote-tag-exists \
 			-registry=${REGISTRY} \
-			-credentialsfromfile \
 			-repository="${IMAGE}" \
 			-tag="$$i" \
 			-alsologtostderr \
