@@ -1,11 +1,10 @@
 PATH         := /opt/docker_utils/bin:$(PATH)
 SHELL        := env PATH=$(PATH) /bin/bash
-REGISTRY     ?= docker.seibert-media.net
-IMAGE        ?= seibertmedia/erpnext-base
+REGISTRY     ?= quay.io
+IMAGE        ?= seibertmedia/erpnext
 VERSION      ?= latest
 VERSIONS     = $(VERSION)
 VERSIONS     += $(shell git fetch --tags; git tag -l --points-at HEAD)
-PASSWORDFILE ?= /home/jenkins/.docker/seibertmedia-password
 
 default: build
 
@@ -27,10 +26,8 @@ clean:
 
 upload:
 	@for i in $(VERSIONS); do \
-		exists=`docker_remote_tag_exists \
+		exists=`docker-remote-tag-exists \
 			-registry=${REGISTRY} \
-			-username=seibertmedia \
-			-passwordfile="${PASSWORDFILE}" \
 			-repository="${IMAGE}" \
 			-tag="$$i" \
 			-alsologtostderr \
