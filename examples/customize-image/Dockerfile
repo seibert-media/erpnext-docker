@@ -1,4 +1,4 @@
-FROM docker.seibert-media.net/seibertmedia/erpnext-base:3.1.0
+FROM quay.io/seibertmedia/erpnext:3.1.0
 
 LABEL maintainer="//SEIBERT/MEDIA GmbH  <docker@seibert-media.net>"
 
