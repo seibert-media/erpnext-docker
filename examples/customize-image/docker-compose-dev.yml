@@ -44,11 +44,14 @@ services:
 
   erpnext:
     container_name: erpnext
-    image: quay.io/seibertmedia/erpnext:latest
+    image: erpnext:customized
     build:
       context: .
+    volumes:
+      - ./apps/banana:/home/frappe/bench-repo/apps/banana
     ports:
-      - "8080:8080"
+      - "8000:8000"
+      - "9000:9000"
     environment:
       - ROOT_PASSWORD=123
       - ADMIN_PASSWORD=123
@@ -56,7 +59,7 @@ services:
       - DB_NAME=1bd3e0294da19198
       - DB_PASSWORD=iAlcDxokJhGvpxaK
       - ENCRYPTION_KEY=vZUk5YjEeRdQkGWOFecw2TBFIvmxB7gJ7lZwIE3S9Ds
-      - WORKER=2
+      - DEVELOPER_MODE=1
     extra_hosts:
       - "site1.local:127.0.0.1"
     stdin_open: true
@@ -71,3 +74,4 @@ services:
       - redis-cache
       - redis-queue
       - redis-socketio
+    command: ["bench","start"]
