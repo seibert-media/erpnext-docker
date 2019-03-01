@@ -44,7 +44,7 @@ services:
 
   erpnext:
     container_name: erpnext
-    image: quay.io/seibertmedia/erpnext:latest
+    image: erpnext:customized
     build:
       context: .
     volumes:

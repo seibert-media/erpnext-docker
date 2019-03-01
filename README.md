@@ -1,10 +1,10 @@
-# ERPNext Base Docker Image
+# ERPNext Docker Image
 
-This image can be used as base docker image for ERPNext. 
+This image can be used to run ERPNext in production within Docker.
 
-## Local
+## Run with docker-compose
 
-build or pull erpnext image
+Build or pull ERPNext image.
 
 Pull:
 
@@ -21,6 +21,7 @@ docker-compose build
 Start:
 ```bash
 docker-compose up --force-recreate -d
+docker-compose logs -f --tail=10
 ```
 
 Open in Browser
@@ -29,20 +30,18 @@ Open in Browser
 
 Login with Administrator and 123
 
-## Dev
-
-Clone seibertmedia app into docker directory:
-```
-mkdir apps
-cd apps
-git clone git@bitbucket.org:seibertmedia-alle/seibertmedia-app.git
-mv seibertmedia-app seibertmedia
-```
+## Start in developer mode
 
 Start container in dev-mode:
 ```
-make dev
+docker-compose -f docker-compose-dev.yml up -d
+docker-compose -f docker-compose-dev.yml logs -f --tail=10
 ```
+
+## Customization
+
+Best practice for adding custom apps is building an individual child image which inherits from this image.
+One basic example can be found under examples/customize-image/
 
 ## Links
 

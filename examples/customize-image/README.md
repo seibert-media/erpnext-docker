@@ -1,6 +1,5 @@
 # Customize ERPNext Docker Image with sample apps
 
-
 With the help of apps further functions can be integrated into ERPNext.
 
 ## Installation
@@ -8,34 +7,25 @@ With the help of apps further functions can be integrated into ERPNext.
 The example [ERPNext Banana App](https://github.com/bborbe/erpnext-banana-app), contains a self-written script,
 which displays exemplary messages when reloading a page or creating an object under the Doctype _Customer_.
 
-
-Clone sample app _banana_ into directory `apps`
-```
-mkdir apps
-cd apps
-git clone https://github.com/bborbe/erpnext-banana-app.git
-mv erpnext-banana-app banana
-```
-
 ## Create custom apps
+
 As well as the _Banana App_ you can store your own apps in the folder `apps`.
 Therefore the `Dockerfile` has to be extended by the added apps to copy and install all apps into the ERPNext repo.
 For each app a script has to be created in the `entrypoints` foder, so that each one can be installed individually while ERPNext is starting.
 The scripts can be created in order and provided with the name of the respective app. For example `32_install_app.sh`.
-
 
 ## Usage
 
 Create image from Dockerfile
 
 ```
-docker build --no-cache --rm=true -t quay.io/seibertmedia/erpnext:3.1.0 . 
+docker build --no-cache --rm=true -t erpnext:customized .
 ```
 
 Start container
 
 ```
-docker-compose up -d
+docker-compose up --force-recreate -d
 docker-compose logs -f --tail=10
 ```
 
@@ -63,7 +53,3 @@ Execute a command in container
 ```
 docker exec -ti erpnext bash
 ```
-
-
-
-
