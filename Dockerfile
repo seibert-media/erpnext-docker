@@ -2,8 +2,8 @@ FROM ubuntu:18.04
 
 LABEL maintainer="//SEIBERT/MEDIA GmbH  <docker@seibert-media.net>"
 
-ARG FRAPPE_VERSION=v10.1.71
-ARG ERPNEXT_VERSION=v10.1.81
+ARG FRAPPE_VERSION=v11.1.13
+ARG ERPNEXT_VERSION=v11.1.13
 ARG BENCH_VERSION=master
 
 RUN set -x \
@@ -37,11 +37,11 @@ RUN set -x \
 	mariadb-common \
 	nodejs \
 	npm \
-	python-dev \
-	python-pip \
-	python-setuptools \
-	python-tk \
-	python-wheel \
+	python3-dev \
+	python3-pip \
+	python3-setuptools \
+	python3-tk \
+	python3-wheel \
 	redis-tools \
 	rlwrap \
 	software-properties-common \
@@ -74,11 +74,11 @@ RUN npm install -g yarn
 
 WORKDIR /home/frappe
 RUN git clone -b ${BENCH_VERSION} https://github.com/frappe/bench.git bench-repo
-RUN pip install -e bench-repo
+RUN pip3 install -e bench-repo
 RUN chown -R frappe:frappe /home/frappe
 
 USER frappe
-RUN bench init /home/frappe/bench-repo --ignore-exist --skip-redis-config-generation --frappe-branch ${FRAPPE_VERSION}
+RUN bench init /home/frappe/bench-repo --ignore-exist --skip-redis-config-generation --frappe-branch ${FRAPPE_VERSION} --python python3
 RUN /home/frappe/bench-repo/env/bin/pip install html5lib uwsgi
 
 WORKDIR /home/frappe/bench-repo
