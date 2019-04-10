@@ -8,9 +8,13 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
-## 3.2.1
+## 3.2.2
 
 - Update sql dump
+
+## 3.2.1
+
+- Change restart_supervisor_on_update to true
 
 ## 3.2.0
 
