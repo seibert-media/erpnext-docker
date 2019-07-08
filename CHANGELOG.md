@@ -11,7 +11,7 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 ## 3.3.0
 
 - Update Frappe to v11.1.39
-- Update Erpnext to v11.1.39
+- Update Erpnext to v11.1.44
 
 ## 3.2.2
 
