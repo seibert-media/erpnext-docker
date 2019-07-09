@@ -2,7 +2,8 @@ FROM ubuntu:18.04
 
 LABEL maintainer="//SEIBERT/MEDIA GmbH  <docker@seibert-media.net>"
 
-ARG FRAPPE_VERSION=v11.1.39
+# hotfix for v11.1.39
+ARG FRAPPE_VERSION=6afce1d758e7219f5ffee6c6ebae1033d129e1a6
 ARG ERPNEXT_VERSION=v11.1.44
 ARG BENCH_VERSION=master
 
