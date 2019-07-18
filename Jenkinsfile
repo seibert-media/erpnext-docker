@@ -6,7 +6,7 @@ podTemplate(
 	containers: [
 		containerTemplate(
 			name: 'build-docker',
-			image: 'eu.gcr.io/smedia-kubernetes/build-golang:1.12.7-1.3.6',
+			image: 'eu.gcr.io/smedia-kubernetes/build-docker:3.0.0',
 			ttyEnabled: true,
 			command: 'cat',
 			privileged: true,
