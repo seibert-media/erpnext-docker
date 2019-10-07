@@ -23,8 +23,12 @@ echo "set DEVELOPER_MODE to ${DEVELOPER_MODE}"
 sed -i "s/{{DEVELOPER_MODE}}/${DEVELOPER_MODE}/" sites/site1.local/site_config.json
 
 WORKER=${WORKER:-"4"}
-echo "set Worker to ${WORKER}"
+echo "set WORKER to ${WORKER}"
 sed -i "s/{{WORKER}}/${WORKER}/" /etc/supervisor/conf.d/supervisord.conf
+
+MAX_FILE_SIZE=${MAX_FILE_SIZE:-"10MB"}
+echo "set MAX_FILE_SIZE to ${MAX_FILE_SIZE}"
+sed -i "s/{{MAX_FILE_SIZE}}/${MAX_FILE_SIZE}/" sites/site1.local/site_config.json
 
 echo "set bench values"
 bench set-mariadb-host "${DB_HOST}"
