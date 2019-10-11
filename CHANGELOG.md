@@ -8,6 +8,11 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 3.5.0
+
+- Update Frappe to v12.0.16
+- Update Erpnext to v12.1.6
+
 ## 3.4.0
 
 - Allow configure max_file_size
