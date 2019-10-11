@@ -56,13 +56,13 @@ podTemplate(
 					}
 				}
 				stage('Build') {
-					timeout(time: 15, unit: 'MINUTES') {
+					timeout(time: 20, unit: 'MINUTES') {
 						sh "VERSION=${env.BRANCH_NAME} make build"
 					}
 				}
 				stage('Upload') {
 					if (env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'test') {
-						timeout(time: 15, unit: 'MINUTES') {
+						timeout(time: 5, unit: 'MINUTES') {
 							sh "VERSION=${env.BRANCH_NAME} make upload"
 						}
 					}
