@@ -10,6 +10,9 @@ default: build
 
 all: build upload clean
 
+deps:
+	go get -u github.com/bborbe/docker-utils/cmd/docker-remote-tag-exists
+
 build:
 	@tags=""; \
 	for i in $(VERSIONS); do \
