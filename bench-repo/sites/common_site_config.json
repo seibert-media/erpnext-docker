@@ -18,5 +18,5 @@
 	"update_bench_on_update": false,
 	"webserver_port": 8000,
 	"admin_password": "{{ADMIN_PASSWORD}}",
-	"max_file_size": "{{MAX_FILE_SIZE}}"
+	"max_file_size": {{MAX_FILE_SIZE}}
 }
