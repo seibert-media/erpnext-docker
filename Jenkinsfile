@@ -56,7 +56,7 @@ podTemplate(
 					}
 				}
 				stage('Build') {
-					timeout(time: 15, unit: 'MINUTES') {
+					timeout(time: 20, unit: 'MINUTES') {
 						sh "VERSION=${env.BRANCH_NAME} make build"
 					}
 				}
