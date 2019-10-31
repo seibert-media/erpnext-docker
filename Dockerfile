@@ -2,9 +2,13 @@ FROM ubuntu:18.04
 
 LABEL maintainer="//SEIBERT/MEDIA GmbH  <docker@seibert-media.net>"
 
-ARG FRAPPE_VERSION=v12.0.17
-ARG ERPNEXT_VERSION=v12.1.7
 ARG BENCH_VERSION=master
+
+ARG FRAPPE_VERSION=test
+ARG FRAPPE_PATH=https://github.com/seibert-media/frappe.git
+
+ARG ERPNEXT_VERSION=test
+ARG ERPNEXT_PATH=https://github.com/seibert-media/erpnext.git
 
 RUN set -x \
 	&& DEBIAN_FRONTEND=noninteractive apt-get update --quiet \
@@ -78,11 +82,17 @@ RUN pip3 install -e bench-repo
 RUN chown -R frappe:frappe /home/frappe
 
 USER frappe
-RUN bench init /home/frappe/bench-repo --ignore-exist --skip-redis-config-generation --frappe-branch ${FRAPPE_VERSION} --python python3
+RUN bench init /home/frappe/bench-repo \
+	--ignore-exist \
+	--skip-redis-config-generation \
+	--frappe-branch ${FRAPPE_VERSION} \
+	--frappe-path ${FRAPPE_PATH} \
+	--python python3
 RUN /home/frappe/bench-repo/env/bin/pip install html5lib uwsgi
 
 WORKDIR /home/frappe/bench-repo
-RUN bench get-app erpnext https://github.com/frappe/erpnext.git --branch ${ERPNEXT_VERSION}
+RUN bench get-app erpnext ${ERPNEXT_PATH} \
+	--branch ${ERPNEXT_VERSION}
 
 USER root
 RUN mkdir -p /var/log/supervisor
