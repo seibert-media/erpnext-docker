@@ -30,6 +30,10 @@ MAX_FILE_SIZE=${MAX_FILE_SIZE:-"10485760"}
 echo "set MAX_FILE_SIZE to ${MAX_FILE_SIZE}"
 sed -i "s/{{MAX_FILE_SIZE}}/${MAX_FILE_SIZE}/" sites/common_site_config.json
 
+IGNORE_CSRF=${IGNORE_CSRF:-"false"}
+echo "set IGNORE_CSRF to ${IGNORE_CSRF}"
+sed -i "s/{{IGNORE_CSRF}}/${IGNORE_CSRF}/" sites/common_site_config.json
+
 echo "set bench values"
 bench set-mariadb-host "${DB_HOST}"
 bench set-admin-password "${ADMIN_PASSWORD}"
