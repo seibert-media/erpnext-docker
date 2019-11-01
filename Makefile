@@ -46,7 +46,7 @@ versions:
 	@for i in $(VERSIONS); do echo $$i; done;
 
 open:
-	open http://127.0.0.1:8080
+	open http://127.0.0.1:8080/desk
 
 exec:
 	docker exec -ti erpnext bash
