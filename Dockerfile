@@ -10,6 +10,8 @@ ARG FRAPPE_PATH=https://github.com/seibert-media/frappe.git
 ARG ERPNEXT_VERSION=test
 ARG ERPNEXT_PATH=https://github.com/seibert-media/erpnext.git
 
+ARG WKHTMLTOX_URL=https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
+
 RUN set -x \
 	&& DEBIAN_FRONTEND=noninteractive apt-get update --quiet \
 	&& DEBIAN_FRONTEND=noninteractive apt-get upgrade --quiet --yes \
@@ -70,7 +72,7 @@ RUN locale-gen en_US.UTF-8
 RUN groupadd -g 500 frappe
 RUN useradd -ms /bin/bash -u 500 -g 500 frappe
 
-RUN curl --connect-timeout 10 --max-time 120 -sSL https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb > wkhtmltopdf.deb \
+RUN curl --connect-timeout 10 --max-time 120 -sSL ${WKHTMLTOX_URL} > wkhtmltopdf.deb \
 	&& dpkg -i wkhtmltopdf.deb \
 	&& rm wkhtmltopdf.deb
 
