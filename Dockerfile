@@ -4,10 +4,10 @@ LABEL maintainer="//SEIBERT/MEDIA GmbH  <docker@seibert-media.net>"
 
 ARG BENCH_VERSION=master
 
-ARG FRAPPE_VERSION=test
+ARG FRAPPE_VERSION=master
 ARG FRAPPE_PATH=https://github.com/seibert-media/frappe.git
 
-ARG ERPNEXT_VERSION=test
+ARG ERPNEXT_VERSION=master
 ARG ERPNEXT_PATH=https://github.com/seibert-media/erpnext.git
 
 ARG WKHTMLTOX_URL=https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb

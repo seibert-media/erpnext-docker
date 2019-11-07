@@ -8,15 +8,11 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
-## 3.5.1
+## 4.0.0
 
-- Update Frappe to v12.0.17
-- Update Erpnext to v12.1.7
-
-## 3.5.0
-
-- Update Frappe to v12.0.16
-- Update Erpnext to v12.1.6
+- Allow configure frappe and erpnext repo and branch used
+- Set default to github.com/seibert-media/frappe@master and github.com/seibert-media/erpnext@master 
+- Only build master and test versions
 
 ## 3.4.2
 
