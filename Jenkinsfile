@@ -29,7 +29,7 @@ podTemplate(
 ) {
 	node(label) {
 		properties([
-			buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '14', numToKeepStr: '50')),
+			buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '5', numToKeepStr: '10')),
 			pipelineTriggers([
 				cron('H 2 * * *'),
 				pollSCM('H/5 * * * *'),
