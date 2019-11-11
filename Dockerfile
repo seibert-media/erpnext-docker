@@ -2,9 +2,15 @@ FROM ubuntu:18.04
 
 LABEL maintainer="//SEIBERT/MEDIA GmbH  <docker@seibert-media.net>"
 
-ARG FRAPPE_VERSION=v11.1.41
-ARG ERPNEXT_VERSION=v11.1.44
 ARG BENCH_VERSION=master
+
+ARG FRAPPE_VERSION=master
+ARG FRAPPE_PATH=https://github.com/seibert-media/frappe.git
+
+ARG ERPNEXT_VERSION=master
+ARG ERPNEXT_PATH=https://github.com/seibert-media/erpnext.git
+
+ARG WKHTMLTOX_URL=https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
 
 RUN set -x \
 	&& DEBIAN_FRONTEND=noninteractive apt-get update --quiet \
@@ -66,7 +72,7 @@ RUN locale-gen en_US.UTF-8
 RUN groupadd -g 500 frappe
 RUN useradd -ms /bin/bash -u 500 -g 500 frappe
 
-RUN curl --connect-timeout 10 --max-time 120 -sSL https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb > wkhtmltopdf.deb \
+RUN curl --connect-timeout 10 --max-time 120 -sSL ${WKHTMLTOX_URL} > wkhtmltopdf.deb \
 	&& dpkg -i wkhtmltopdf.deb \
 	&& rm wkhtmltopdf.deb
 
@@ -78,11 +84,17 @@ RUN pip3 install -e bench-repo
 RUN chown -R frappe:frappe /home/frappe
 
 USER frappe
-RUN bench init /home/frappe/bench-repo --ignore-exist --skip-redis-config-generation --frappe-branch ${FRAPPE_VERSION} --python python3
+RUN bench init /home/frappe/bench-repo \
+	--ignore-exist \
+	--skip-redis-config-generation \
+	--frappe-branch ${FRAPPE_VERSION} \
+	--frappe-path ${FRAPPE_PATH} \
+	--python python3
 RUN /home/frappe/bench-repo/env/bin/pip install html5lib uwsgi
 
 WORKDIR /home/frappe/bench-repo
-RUN bench get-app erpnext https://github.com/frappe/erpnext.git --branch ${ERPNEXT_VERSION}
+RUN bench get-app erpnext ${ERPNEXT_PATH} \
+	--branch ${ERPNEXT_VERSION}
 
 USER root
 RUN mkdir -p /var/log/supervisor

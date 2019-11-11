@@ -29,7 +29,7 @@ podTemplate(
 ) {
 	node(label) {
 		properties([
-			buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '14', numToKeepStr: '50')),
+			buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '5', numToKeepStr: '10')),
 			pipelineTriggers([
 				cron('H 2 * * *'),
 				pollSCM('H/5 * * * *'),
@@ -62,7 +62,7 @@ podTemplate(
 				}
 				stage('Upload') {
 					if (env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'test') {
-						timeout(time: 15, unit: 'MINUTES') {
+						timeout(time: 5, unit: 'MINUTES') {
 							sh "VERSION=${env.BRANCH_NAME} make upload"
 						}
 					}

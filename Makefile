@@ -4,19 +4,31 @@ REGISTRY     ?= quay.io
 IMAGE        ?= seibertmedia/erpnext
 VERSION      ?= latest
 VERSIONS     = $(VERSION)
-VERSIONS     += $(shell git fetch --tags; git tag -l --points-at HEAD)
 
 default: build
 
 all: build upload clean
+
+deps:
+	go get -u github.com/bborbe/docker-utils/cmd/docker-remote-tag-exists
 
 build:
 	@tags=""; \
 	for i in $(VERSIONS); do \
 		tags="$$tags -t $(REGISTRY)/$(IMAGE):$$i"; \
 	done; \
-	echo "docker build --no-cache --rm=true $$tags ."; \
-	docker build --no-cache --rm=true $$tags .
+	echo "docker build \
+	--build-arg FRAPPE_PATH=https://github.com/seibert-media/frappe.git \
+	--build-arg FRAPPE_VERSION=$(VERSION) \
+	--build-arg ERPNEXT_PATH=https://github.com/seibert-media/erpnext.git \
+	--build-arg ERPNEXT_VERSION=$(VERSION) \
+	--no-cache --rm=true $$tags ."; \
+	docker build \
+	--build-arg FRAPPE_PATH=https://github.com/seibert-media/frappe.git \
+	--build-arg FRAPPE_VERSION=$(VERSION) \
+	--build-arg ERPNEXT_PATH=https://github.com/seibert-media/erpnext.git \
+	--build-arg ERPNEXT_VERSION=$(VERSION) \
+	--no-cache --rm=true $$tags .
 
 clean:
 	@for i in $(VERSIONS); do \
@@ -43,7 +55,7 @@ versions:
 	@for i in $(VERSIONS); do echo $$i; done;
 
 open:
-	open http://127.0.0.1:8080
+	open http://127.0.0.1:8080/desk
 
 exec:
 	docker exec -ti erpnext bash

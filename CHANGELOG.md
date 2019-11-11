@@ -8,6 +8,12 @@ Please choose versions by [Semantic Versioning](http://semver.org/).
 * MINOR version when you add functionality in a backwards-compatible manner, and
 * PATCH version when you make backwards-compatible bug fixes.
 
+## 4.0.0
+
+- Allow configure frappe and erpnext repo and branch used
+- Set default to github.com/seibert-media/frappe@master and github.com/seibert-media/erpnext@master 
+- Only build master and test versions
+
 ## 3.4.2
 
 - Remove quotes from max_file_size 
