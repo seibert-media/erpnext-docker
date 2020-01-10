@@ -62,7 +62,7 @@ podTemplate(
 				}
 				stage('Upload') {
 					if (env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'test') {
-						timeout(time: 5, unit: 'MINUTES') {
+						timeout(time: 10, unit: 'MINUTES') {
 							sh "VERSION=${env.BRANCH_NAME} make upload"
 						}
 					}
