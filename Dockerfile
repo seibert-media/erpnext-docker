@@ -3,6 +3,7 @@ FROM ubuntu:18.04
 LABEL maintainer="//SEIBERT/MEDIA GmbH  <docker@seibert-media.net>"
 
 ARG BENCH_VERSION=master
+ARG BENCH_PATH=https://github.com/seibert-media/bench.git
 
 ARG FRAPPE_VERSION=master
 ARG FRAPPE_PATH=https://github.com/seibert-media/frappe.git
@@ -79,7 +80,7 @@ RUN curl --connect-timeout 10 --max-time 120 -sSL ${WKHTMLTOX_URL} > wkhtmltopdf
 RUN npm install -g yarn
 
 WORKDIR /home/frappe
-RUN git clone -b ${BENCH_VERSION} https://github.com/frappe/bench.git bench-repo
+RUN git clone -b ${BENCH_VERSION} ${BENCH_PATH} bench-repo
 RUN pip3 install -e bench-repo
 RUN chown -R frappe:frappe /home/frappe
 
