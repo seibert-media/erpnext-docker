@@ -20,5 +20,5 @@
 	"admin_password": "{{ADMIN_PASSWORD}}",
 	"ignore_csrf": {{IGNORE_CSRF}},
 	"max_file_size": {{MAX_FILE_SIZE}},
-	"max_reports_per_user": 999
+	"max_reports_per_user": {{MAX_REPORTS_PER_USER}}
 }
