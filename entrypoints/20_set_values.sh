@@ -34,6 +34,10 @@ IGNORE_CSRF=${IGNORE_CSRF:-"false"}
 echo "set IGNORE_CSRF to ${IGNORE_CSRF}"
 sed -i "s/{{IGNORE_CSRF}}/${IGNORE_CSRF}/" sites/common_site_config.json
 
+MAX_REPORTS_PER_USER=${MAX_REPORTS_PER_USER:-"3"}
+echo "set MAX_REPORTS_PER_USER to ${MAX_REPORTS_PER_USER}"
+sed -i "s/{{MAX_REPORTS_PER_USER}}/${MAX_REPORTS_PER_USER}/" sites/common_site_config.json
+
 echo "set bench values"
 bench set-mariadb-host "${DB_HOST}"
 bench set-admin-password "${ADMIN_PASSWORD}"
