@@ -34,6 +34,22 @@ IGNORE_CSRF=${IGNORE_CSRF:-"false"}
 echo "set IGNORE_CSRF to ${IGNORE_CSRF}"
 sed -i "s/{{IGNORE_CSRF}}/${IGNORE_CSRF}/" sites/common_site_config.json
 
+IGNORE_CSRF=${SCHEDULER_INTERVAL:-"360"}
+echo "set SCHEDULER_INTERVAL to ${IGNORE_CSRF}"
+sed -i "s/{{SCHEDULER_INTERVAL}}/${SCHEDULER_INTERVAL}/" sites/common_site_config.json
+
+IGNORE_CSRF=${REDIS_SOCKETIO:-"redis-sockerio:12000"}
+echo "set REDIS_SOCKETIO to ${REDIS_SOCKETIO}"
+sed -i "s/{{REDIS_SOCKETIO}}/${REDIS_SOCKETIO}/" sites/common_site_config.json
+
+IGNORE_CSRF=${REDIS_CACHE:-"redis-cache:13000"}
+echo "set REDIS_CACHE to ${REDIS_CACHE}"
+sed -i "s/{{REDIS_CACHE}}/${REDIS_CACHE}/" sites/common_site_config.json
+
+IGNORE_CSRF=${REDIS_QUEUE:-"redis-queue:11000"}
+echo "set REDIS_QUEUE to ${REDIS_QUEUE}"
+sed -i "s/{{REDIS_QUEUE}}/${REDIS_QUEUE}/" sites/common_site_config.json
+
 echo "set bench values"
 bench set-mariadb-host "${DB_HOST}"
 bench set-admin-password "${ADMIN_PASSWORD}"
