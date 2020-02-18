@@ -78,6 +78,7 @@ RUN curl --connect-timeout 10 --max-time 120 -sSL ${WKHTMLTOX_URL} > wkhtmltopdf
 RUN npm install -g yarn
 
 WORKDIR /home/frappe
+RUN pip3 install
 RUN git clone -b ${BENCH_VERSION} ${BENCH_PATH} bench-repo
 RUN pip3 install -e bench-repo
 RUN chown -R frappe:frappe /home/frappe
@@ -89,7 +90,8 @@ RUN bench init /home/frappe/bench-repo \
 	--frappe-branch ${FRAPPE_VERSION} \
 	--frappe-path ${FRAPPE_PATH} \
 	--python python3
-RUN /home/frappe/bench-repo/env/bin/pip install html5lib uwsgi
+COPY froozenRequirements.txt /home/frappe/bench-repo/froozenRequirements.txt
+RUN /home/frappe/bench-repo/env/bin/pip install --force-reinstall -r ./froozenRequirements.txt
 
 WORKDIR /home/frappe/bench-repo
 RUN bench get-app erpnext ${ERPNEXT_PATH} \
