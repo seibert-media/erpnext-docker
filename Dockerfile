@@ -89,7 +89,8 @@ RUN bench init /home/frappe/bench-repo \
 	--frappe-branch ${FRAPPE_VERSION} \
 	--frappe-path ${FRAPPE_PATH} \
 	--python python3
-RUN /home/frappe/bench-repo/env/bin/pip install html5lib uwsgi
+COPY froozenRequirements.txt /home/frappe/bench-repo/froozenRequirements.txt
+RUN /home/frappe/bench-repo/env/bin/pip install --force-reinstall -r ./froozenRequirements.txt
 
 WORKDIR /home/frappe/bench-repo
 RUN bench get-app erpnext ${ERPNEXT_PATH} \
