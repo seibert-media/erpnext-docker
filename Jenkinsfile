@@ -38,38 +38,48 @@ podTemplate(
 		try {
 			container('build-docker') {
 				stage('Fix SSH Permissions') {
-					timeout(time: 1, unit: 'MINUTES') {
-					    sh 'cp -R /home/jenkins/.ssh /root/.ssh'
-						sh 'chmod 600 /root/.ssh/*'
+					retry(3) {
+						timeout(time: 1, unit: 'MINUTES') {
+							sh 'cp -R /home/jenkins/.ssh /root/.ssh'
+							sh 'chmod 600 /root/.ssh/*'
+						}
 					}
 				}
 				stage('Checkout') {
-					timeout(time: 5, unit: 'MINUTES') {
-						checkout([
-							$class: 'GitSCM',
-							branches: scm.branches,
-							doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
-							extensions: scm.extensions + [[$class: 'CloneOption', noTags: false, reference: '', shallow: true]],
-							submoduleCfg: [],
-							userRemoteConfigs: scm.userRemoteConfigs
-						])
+					retry(3) {
+						timeout(time: 5, unit: 'MINUTES') {
+							checkout([
+								$class: 'GitSCM',
+								branches: scm.branches,
+								doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
+								extensions: scm.extensions + [[$class: 'CloneOption', noTags: false, reference: '', shallow: true]],
+								submoduleCfg: [],
+								userRemoteConfigs: scm.userRemoteConfigs
+							])
+						}
 					}
 				}
 				stage('Build') {
-					timeout(time: 30, unit: 'MINUTES') {
-						sh "VERSION=${env.BRANCH_NAME} make build"
+					retry(3) {
+						timeout(time: 30, unit: 'MINUTES') {
+							sh "VERSION=${env.BRANCH_NAME} make build"
+						}
 					}
 				}
 				stage('Upload') {
-					if (env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'test') {
+					retry(3) {
 						timeout(time: 10, unit: 'MINUTES') {
-							sh "VERSION=${env.BRANCH_NAME} make upload"
+							if (env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'test') {
+								sh "VERSION=${env.BRANCH_NAME} make upload"
+							}
 						}
 					}
 				}
 				stage('Clean') {
-					timeout(time: 5, unit: 'MINUTES') {
-						sh "VERSION=${env.BRANCH_NAME} make clean"
+					retry(3) {
+						timeout(time: 5, unit: 'MINUTES') {
+							sh "VERSION=${env.BRANCH_NAME} make clean"
+						}
 					}
 				}
 			}
