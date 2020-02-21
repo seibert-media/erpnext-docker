@@ -22,10 +22,8 @@ Deprecated==1.2.7
 docutils==0.15.2
 dropbox==9.1.0
 email-reply-parser==0.5.9
--e git+https://github.com/seibert-media/erpnext.git@6281e407e265eedc72dc5f11f430e53f9d9d8e57#egg=erpnext
 et-xmlfile==1.0.1
 Faker==2.0.4
--e git+https://github.com/seibert-media/frappe.git@013791fb313e6d6e44cb451744000ccb95ae6f05#egg=frappe
 frontmatter==3.0.5
 future==0.18.2
 gitdb2==2.0.6
@@ -63,7 +61,6 @@ pandas==1.0.1
 parso==0.6.1
 passlib==1.7.2
 pathtools==0.1.2
--e git+https://github.com/frappe/python-pdfkit.git@48dba3d1de5a067f30f6a4a7b779d028837139b7#egg=pdfkit
 pexpect==4.8.0
 pickleshare==0.7.5
 Pillow==7.0.0
@@ -97,7 +94,6 @@ rq==0.12.0
 rsa==4.0
 s3transfer==0.3.3
 schedule==0.6.0
--e git+https://github.com/seibert-media/bench.git@fe94787f8c527574c1321e1c0bc35a41863b7ee9#egg=seibertmedia&subdirectory=apps/seibertmedia
 selenium==3.141.0
 semantic-version==2.8.4
 six==1.14.0
