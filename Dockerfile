@@ -90,7 +90,7 @@ RUN bench init /home/frappe/bench-repo \
 	--frappe-path ${FRAPPE_PATH} \
 	--python python3
 COPY froozenRequirements.txt /home/frappe/bench-repo/froozenRequirements.txt
-RUN /home/frappe/bench-repo/env/bin/pip install --force-reinstall -r ./froozenRequirements.txt
+RUN /home/frappe/bench-repo/env/bin/pip install --force-reinstall -r /home/frappe/bench-repo/froozenRequirements.txt
 
 WORKDIR /home/frappe/bench-repo
 RUN bench get-app erpnext ${ERPNEXT_PATH} \
