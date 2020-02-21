@@ -78,7 +78,6 @@ RUN curl --connect-timeout 10 --max-time 120 -sSL ${WKHTMLTOX_URL} > wkhtmltopdf
 RUN npm install -g yarn
 
 WORKDIR /home/frappe
-RUN pip3 install
 RUN git clone -b ${BENCH_VERSION} ${BENCH_PATH} bench-repo
 RUN pip3 install -e bench-repo
 RUN chown -R frappe:frappe /home/frappe
