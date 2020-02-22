@@ -33,6 +33,7 @@ podTemplate(
 			pipelineTriggers([
 				cron('H 2 * * *'),
 				pollSCM('H/5 * * * *'),
+				[$class: 'PeriodicFolderTrigger', interval: '5m']
 			]),
 		])
 		try {
