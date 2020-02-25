@@ -35,7 +35,7 @@ echo "set IGNORE_CSRF to ${IGNORE_CSRF}"
 sed -i "s/{{IGNORE_CSRF}}/${IGNORE_CSRF}/" sites/common_site_config.json
 
 SCHEDULER_INTERVAL=${SCHEDULER_INTERVAL:-"360"}
-echo "set SCHEDULER_INTERVAL to ${IGNORE_CSRF}"
+echo "set SCHEDULER_INTERVAL to ${SCHEDULER_INTERVAL}"
 sed -i "s/{{SCHEDULER_INTERVAL}}/${SCHEDULER_INTERVAL}/" sites/common_site_config.json
 
 REDIS_SOCKETIO=${REDIS_SOCKETIO:-"redis-socketio:12000"}
