@@ -70,7 +70,7 @@ podTemplate(
 				stage('Upload') {
 					retry(3) {
 						timeout(time: 10, unit: 'MINUTES') {
-							if (env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'test') {
+							if (env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'staging' || env.BRANCH_NAME == 'dev') {
 								sh "VERSION=${env.BRANCH_NAME} make upload"
 							}
 						}

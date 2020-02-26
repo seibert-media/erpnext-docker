@@ -44,7 +44,7 @@ upload:
 			-tag="$$i" \
 			-alsologtostderr \
 			-v=0`; \
-		if [ "$${exists}" = "false" ] || [ "$$i" = "master" ] || [ "$$i" = "test" ]; then \
+		if [ "$${exists}" = "false" ] || [ "$$i" = "master" ] || [ "$$i" = "staging" ] || [ "$$i" = "dev" ]; then \
 			docker push $(REGISTRY)/$(IMAGE):$$i; \
 		else \
 			echo "$(REGISTRY)/$(IMAGE):$$i already exists => skip"; \
