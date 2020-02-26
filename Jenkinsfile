@@ -62,7 +62,7 @@ podTemplate(
 				}
 				stage('Build') {
 					retry(3) {
-						timeout(time: 30, unit: 'MINUTES') {
+						timeout(time: 60, unit: 'MINUTES') {
 							sh "VERSION=${env.BRANCH_NAME} make build"
 						}
 					}
