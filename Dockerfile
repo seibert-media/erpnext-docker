@@ -11,7 +11,7 @@ ARG FRAPPE_PATH=https://github.com/seibert-media/frappe.git
 ARG ERPNEXT_VERSION=master
 ARG ERPNEXT_PATH=https://github.com/seibert-media/erpnext.git
 
-ARG WKHTMLTOX_URL=https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
+ARG WKHTMLTOX_URL=https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
 
 RUN set -x \
 	&& DEBIAN_FRONTEND=noninteractive apt-get update --quiet \
