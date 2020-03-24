@@ -18,6 +18,9 @@ sed -i "s/{{DB_PASSWORD}}/${DB_PASSWORD}/" sites/site1.local/site_config.json
 echo "set ENCRYPTION_KEY to ***"
 sed -i "s/{{ENCRYPTION_KEY}}/${ENCRYPTION_KEY}/" sites/site1.local/site_config.json
 
+echo "set HOST_NAME to ***"
+sed -i "s/{{HOST_NAME}}/${HOST_NAME}/" sites/site1.local/site_config.json
+
 DEVELOPER_MODE=${DEVELOPER_MODE:-"0"}
 echo "set DEVELOPER_MODE to ${DEVELOPER_MODE}"
 sed -i "s/{{DEVELOPER_MODE}}/${DEVELOPER_MODE}/" sites/site1.local/site_config.json
