@@ -17,7 +17,7 @@ podTemplate(
 		),
 	],
 	volumes: [
-		secretVolume(mountPath: '/home/jenkins/.ssh', secretName: 'ssh'),
+		secretVolume(mountPath: '/ssh', secretName: 'ssh'),
 		secretVolume(mountPath: '/root/.docker', secretName: 'docker-quay'),
 		hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock'),
 	],
@@ -41,8 +41,9 @@ podTemplate(
 				stage('Fix SSH Permissions') {
 					retry(3) {
 						timeout(time: 1, unit: 'MINUTES') {
-							sh 'cp -R /home/jenkins/.ssh /root/.ssh'
-							sh 'chmod 600 /root/.ssh/*'
+							sh 'cp -R /ssh /root/.ssh'
+							sh 'cp -R /ssh /home/jenkins/.ssh'
+							sh 'chmod 600 /root/.ssh/* /home/jenkins/.ssh/*'
 						}
 					}
 				}
