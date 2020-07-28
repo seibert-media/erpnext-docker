@@ -54,7 +54,7 @@ podTemplate(
 								$class: 'GitSCM',
 								branches: scm.branches,
 								doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
-								extensions: scm.extensions + [[$class: 'CloneOption', noTags: false, reference: '', shallow: true, timeout: 60]],
+								extensions: scm.extensions + [[$class: 'CloneOption', noTags: false, reference: '', shallow: false, timeout: 60]],
 								submoduleCfg: [],
 								userRemoteConfigs: scm.userRemoteConfigs
 							])
